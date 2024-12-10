@@ -1,9 +1,27 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import Root from './components/ui/Root'
+import HomePage from './pages/HomePage'
+import { ChakraProvider } from '@chakra-ui/react'
+import theme from './theme/theme'
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Root />,
+    children: [
+      {
+        element: <HomePage />
+      }
+    ]
+  }
+])
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <ChakraProvider theme={theme}>
+      <RouterProvider router={router} />
+    </ChakraProvider>
   </StrictMode>
 )
