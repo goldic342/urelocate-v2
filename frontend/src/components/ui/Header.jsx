@@ -3,7 +3,7 @@ import Logo from './Logo'
 import ChakraRouterLink from '../ChakraRouterLink'
 const Header = () => {
   return (
-    <Box as="header" p={3} px={5}>
+    <Box as="header" p={5} px={7}>
       <Flex minW={'max-content'} align={'center'}>
         <Logo />
         <Spacer />

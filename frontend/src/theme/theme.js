@@ -52,8 +52,7 @@ const components = {
       },
       bold: {
         color: 'gray.800',
-        fontWeight: 'black',
-        letterSpacing: 'tight'
+        fontWeight: 'bold'
       },
       subtle: {
         color: 'gray.600',
