@@ -1,7 +1,9 @@
 import { Box, Container, Image } from '@chakra-ui/react'
 import Hero from '../components/landing/Hero'
-import Features from '../components/landing/Features'
+import FeaturesCheckList from '../components/landing/FeaturesCheckList'
 import Footer from '../components/ui/Footer'
+import FeaturesSection from '../components/landing/FeaturesSection'
+import CTA from '../components/landing/CTA'
 
 const HomePage = () => {
   return (
@@ -20,8 +22,15 @@ const HomePage = () => {
         <Image src="https://placehold.co/1920x1280" mt={16} />
         <Box maxW={'4xl'}>
           <Box mt={24}>
-            <Features />
+            <FeaturesSection />
           </Box>
+
+          <Box mt={20}>
+            <FeaturesCheckList />
+          </Box>
+        </Box>
+        <Box mt={18} mb={28}>
+          <CTA />
         </Box>
       </Container>
       <Footer />
