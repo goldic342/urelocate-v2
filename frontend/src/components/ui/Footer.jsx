@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <Box
       as="footer"
-      bg="gray.200"
+      bg="gray.100"
       color="gray.600"
       py={4}
       px={8}
