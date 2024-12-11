@@ -24,7 +24,7 @@ const components = {
         color: 'cyan.600',
         fontWeight: 'semibold'
       },
-      sub: {
+      sublight: {
         color: 'stone.800'
       },
       default: {
