@@ -10,7 +10,7 @@ const CheckIcon = ({ size }) => {
       alignItems={'center'}
       justifyContent={'center'}
       borderRadius={'50%'}
-      bg={'green.400'}
+      bg={'green.300'}
     >
       <Check color="white" size={size} />
     </Box>

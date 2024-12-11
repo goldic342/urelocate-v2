@@ -18,7 +18,12 @@ const Hero = () => {
         >
           Открой себе новое место для жизни без проблем
         </Heading>
-        <Text textAlign={'center'} variant={'sub'} fontSize={'xl'} maxW={'80%'}>
+        <Text
+          textAlign={'center'}
+          variant={'sublight'}
+          fontSize={'xl'}
+          maxW={'80%'}
+        >
           Делаем переезд простым, чтобы вы могли сосредоточиться на главном —
           своей работе и карьерных достижениях.
         </Text>
