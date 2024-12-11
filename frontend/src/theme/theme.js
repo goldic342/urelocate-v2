@@ -1,23 +1,16 @@
 import { extendTheme } from '@chakra-ui/react'
-import '@fontsource/roboto'
-import '@fontsource/montserrat'
-
-const gradients = {
-  primary: 'linear(10deg, cyan.400, cyan.600)',
-  reverse: 'linear(40deg, cyan.600, cyan.400)',
-  secondary: 'linear(185deg, cyan.300, cyan.500)'
-}
+import '@fontsource/dm-sans'
 
 const transitions = {
   base: '0.3s background ease-in-out, 0.3s filter ease-in-out',
   smooth: '0.4s all cubic-bezier(0.4, 0, 0.2, 1)',
   transform: 'transform 0.2s ease-in-out',
-  hover: 'all 0.25s ease-in'
+  hover: 'all 0.2s ease-in'
 }
 
 const fonts = {
-  heading: `'Montserrat', sans-serif`,
-  body: `'Roboto', sans-serif`
+  heading: `'DM Sans', sans-serif`,
+  body: `'DM Sans', sans-serif`
 }
 
 const components = {
@@ -28,13 +21,11 @@ const components = {
     },
     variants: {
       primary: {
-        bgGradient: gradients.reverse,
-        bgClip: 'text',
+        color: 'cyan.600',
         fontWeight: 'semibold'
       },
-      subtle: {
-        color: 'gray.500',
-        fontStyle: 'italic'
+      default: {
+        color: 'gray.500'
       }
     }
   },
@@ -46,13 +37,12 @@ const components = {
     },
     variants: {
       primary: {
-        bgGradient: gradients.reverse,
-        bgClip: 'text',
-        fontWeight: 'extrabold'
+        color: 'cyan.600',
+        fontWeight: 'bold'
       },
       bold: {
         color: 'gray.800',
-        fontWeight: 'bold'
+        fontWeight: 'semibold'
       },
       subtle: {
         color: 'gray.600',
@@ -63,39 +53,30 @@ const components = {
 
   Button: {
     baseStyle: {
-      borderRadius: 'lg',
+      borderRadius: 'full',
       transition: transitions.hover,
       _focus: {
         boxShadow: 'outline'
-      }
+      },
+      fontWeight: 'extrabold'
     },
     variants: {
       primary: {
-        bgGradient: gradients.primary,
-        color: 'white',
-        _hover: {
-          bgGradient: gradients.reverse,
-          boxShadow: 'lg'
-        },
-        _active: {
-          bg: 'cyan.700',
-          transform: 'scale(0.98)'
-        }
-      },
-      secondary: {
         bg: 'cyan.500',
-        bgGradient: gradients.secondary,
         color: 'white',
+        px: 9,
+        py: 6,
         _hover: {
-          bgGradient: gradients.reverse,
+          bg: 'cyan.600',
           boxShadow: 'md'
         },
         _active: {
-          bg: 'cyan.700'
+          bg: 'cyan.800',
+          transform: 'scale(0.98)'
         }
       },
       outline: {
-        borderColor: 'cyan.500',
+        borderColor: 'gray.400',
         color: 'cyan.600',
         _hover: {
           bg: 'cyan.50'
