@@ -24,6 +24,9 @@ const components = {
         color: 'cyan.600',
         fontWeight: 'semibold'
       },
+      sub: {
+        color: 'stone.800'
+      },
       default: {
         color: 'gray.500'
       }
@@ -37,7 +40,7 @@ const components = {
     },
     variants: {
       primary: {
-        color: 'cyan.600',
+        color: 'blue.900',
         fontWeight: 'bold'
       },
       bold: {
@@ -55,6 +58,7 @@ const components = {
     baseStyle: {
       borderRadius: 'full',
       transition: transitions.hover,
+      // Why paddings not working here??
       _focus: {
         boxShadow: 'outline'
       },
@@ -76,7 +80,9 @@ const components = {
         }
       },
       outline: {
-        borderColor: 'gray.400',
+        px: 9,
+        py: 6,
+        borderColor: 'blackAlpha.400',
         color: 'cyan.600',
         _hover: {
           bg: 'cyan.50'
@@ -99,7 +105,12 @@ const components = {
 
 const theme = extendTheme({
   components,
-  fonts
+  fonts,
+  colors: {
+    stone: {
+      800: '#9795B5'
+    }
+  }
 })
 
 export default theme
