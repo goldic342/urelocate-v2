@@ -7,10 +7,8 @@ const Root = ({ children }) => {
   return (
     <>
       <Header />
-      <Box as="main" maxW={'1440px'} mx="auto">
-        <Outlet />
-        {children}
-      </Box>
+      <Outlet />
+      {children}
     </>
   )
 }
