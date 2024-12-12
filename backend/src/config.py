@@ -4,6 +4,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     CAREERJET_AFFID: str
+    CACHE_DIR: str
 
     model_config = SettingsConfigDict(
         case_sensitive=True,
