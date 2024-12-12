@@ -168,7 +168,7 @@ class RelocationModifiers(BaseSettings):
     }
 
     # A scaling factor determining how much English proficiency offsets the need for the local language.
-    english_offset = 0.25
+    english_offset: float = 0.25
 
     language_modifiers: dict[int, HumanNameMod] = {
         1: {"human_name": "beginner", "mod": -20},

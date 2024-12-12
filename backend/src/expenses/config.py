@@ -7,7 +7,7 @@ class LivingCostMultipliers(BaseSettings):
     """
 
     # Adult consumption multipliers (approximate daily consumption)
-    adult_multipliers = {
+    adult_multipliers: dict[str, float] = {
         # Food items (daily consumption)
         "Milk (regular), (1 liter)": 0.5,  # About half a liter per day
         "Loaf of Fresh White Bread (500g)": 1 / 7,  # One loaf per week
@@ -39,10 +39,12 @@ class LivingCostMultipliers(BaseSettings):
 
     # Child consumption multipliers (adjusted for lower consumption)
     # TODO: remove cofee, wine, beer, etc.
-    child_multipliers = {key: value * 0.5 for key, value in adult_multipliers.items()}
+    child_multipliers: dict[str, float] = {
+        key: value * 0.5 for key, value in adult_multipliers.items()
+    }
 
     # Additional child-specific adjustments
-    child_additional_costs = {
+    child_additional_costs: dict[str, float | int] = {
         "Preschool (or Kindergarten), Full Day, Private, Monthly for 1 Child": 1,
         "International Primary School, Yearly for 1 Child": 1
         / 12,  # Converted to monthly

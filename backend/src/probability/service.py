@@ -1,7 +1,7 @@
 from os import stat
 from typing import Any, final
-from src.relocation_calc.models import UserData, UserTechStack
-from src.relocation_calc.config import relocation_modifiers
+from src.probability.models import UserData, UserTechStack
+from src.probability.config import relocation_modifiers
 from src.vacancies.config import vacancies_config
 from src.expenses.service import ExpensesService
 
