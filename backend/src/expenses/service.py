@@ -1,8 +1,10 @@
+from os import name
 import httpx
 from bs4 import BeautifulSoup
 import re
-from typing import Any
 import json
+
+from src.expenses.models import CostOfItem, CostRange, LivingCostOfCountry
 
 
 class ExpensesService:
@@ -22,7 +24,7 @@ class ExpensesService:
 
     async def country_cost_of_living(
         self, country: str, currency: str = "USD"
-    ) -> dict[str, Any]:
+    ) -> LivingCostOfCountry:
         """
         Asynchronously retrieve cost of living data for a given country from Numbeo.
 
@@ -48,9 +50,9 @@ class ExpensesService:
 
         table = soup.find("table", class_="data_wide_table")
 
-        costs = []
+        costs: list[CostOfItem] = []
         if table:
-            rows = table.find_all("tr")[1:]
+            rows = table.find_all("tr")[1:]  # type: ignore
             for row in rows:
                 cols = row.find_all("td")
                 if len(cols) >= 3:
@@ -60,7 +62,8 @@ class ExpensesService:
 
                         cost_text = cols[1].get_text(strip=True)
                         cost_match = re.search(r"([\d,.]+)", cost_text)
-                        cost = cost_match.group(1) if cost_match else None
+                        cost: float | int = cost_match.group(
+                            1) if cost_match else None
 
                         # Extract range
                         range_text = cols[2].get_text(strip=True)
@@ -76,20 +79,20 @@ class ExpensesService:
 
                         if item and cost:
                             costs.append(
-                                {
-                                    "item": item,
-                                    "cost": cost,
-                                    "range": {"low": range_low, "high": range_high},
-                                }
+                                CostOfItem(
+                                    item=item,
+                                    cost=cost,
+                                    const_range=CostRange(
+                                        low=range_low, high=range_high
+                                    ),
+                                )
                             )
                     except Exception as e:
                         print(f"Error parsing row: {e}")
 
-        return {
-            "country": normalized_country.replace("-", " "),
-            "currency": currency,
-            "costs": costs,
-        }
+        return LivingCostOfCountry(
+            name=normalized_country.replace("-", " "), currency=currency, costs=costs
+        )
 
 
 if __name__ == "__main__":
