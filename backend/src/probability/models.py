@@ -5,8 +5,8 @@ from src.vacancies.models import Technology
 
 
 class Dependents(BaseModel):
-    adults: int = 0
-    children: int = 0
+    adults: int = Field(ge=1, default=1)
+    children: int = Field(ge=0, default=0)
 
 
 class UserTechStack(BaseModel):

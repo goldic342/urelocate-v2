@@ -37,7 +37,6 @@ class VacanciesService:
             }
         )
 
-        print(response)
         return response
 
     def check_relocation(
@@ -68,8 +67,7 @@ class VacanciesService:
                 )  # More words = more specific
 
                 # Find whole word matches with surrounding context
-                pattern = r"(\w+\s){0,3}" + \
-                    re.escape(keyword_lower) + r"(\s\w+){0,3}"
+                pattern = r"(\w+\s){0,3}" + re.escape(keyword_lower) + r"(\s\w+){0,3}"
                 context_matches = re.findall(pattern, text, re.IGNORECASE)
 
                 # Calculate match quality

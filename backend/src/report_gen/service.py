@@ -15,7 +15,7 @@ class ReportService:
                 tools=[Technology(name=item) for item in data.tech_stack_tools],
             ),
         )
-        percentage = await RelocationProbabilityService().calc_propability(data)
+        percentage = await RelocationProbabilityService().calc_propability(user_data)
         vacancies = VacanciesService().get_relocation_vacancies(
             user_data.tech_stack.scope,
             user_data.tech_stack.tools,

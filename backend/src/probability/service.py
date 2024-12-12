@@ -1,5 +1,7 @@
 from os import stat
 from typing import Any, final
+
+from pydantic import BaseModel
 from src.probability.models import UserData, UserTechStack
 from src.probability.config import relocation_modifiers
 from src.vacancies.config import vacancies_config
@@ -8,7 +10,9 @@ from src.expenses.service import ExpensesService
 
 class RelocationProbabilityService:
     @staticmethod
-    def __get_mod(path: Any, data: Any) -> int | float:
+    def __get_mod(path: BaseModel | dict, data: Any) -> int | float:
+        if isinstance(path, dict):
+            return path.get(data, {}).get("mod", 0)
         return path.model_dump().get(data, {}).get("mod", 0)
 
     @staticmethod
@@ -20,17 +24,18 @@ class RelocationProbabilityService:
         for technology in vacancies_config.tech_stack_variants.model_dump()[
             tech_stack.scope
         ]:
-            user_has = technology.name.lower() in user_technologies_names
-            has_mod = technology.name in relocation_modifiers.tech_modifiers.keys()
+            tech_name = technology["name"].lower()
+            user_has = tech_name in user_technologies_names
+            has_mod = tech_name in relocation_modifiers.tech_modifiers.keys()
 
             if user_has and has_mod:
-                total += relocation_modifiers.tech_modifiers[technology.name]
+                total += relocation_modifiers.tech_modifiers[tech_name]
 
         return total
 
     @staticmethod
     def __calc_geography_mod(user_country: str) -> int | float:
-        for region in relocation_modifiers.geography_modifiers:
+        for region in relocation_modifiers.geography_modifiers.values():
             for country in region["countries"]:  # type: ignore
                 if user_country == country:
                     return region["mod"]  # type: ignore

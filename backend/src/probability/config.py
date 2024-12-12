@@ -22,7 +22,7 @@ class RelocationModifiers(BaseSettings):
     }
 
     tech_modifiers: dict[str, float] = {
-        "js": 3.46,
+        "javascript": 3.46,
         "python": 2.55,
         "sql": 2.55,
         "java": 1.515,
