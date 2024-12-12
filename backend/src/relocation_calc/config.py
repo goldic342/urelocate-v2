@@ -4,11 +4,11 @@ from pydantic_settings import BaseSettings
 class RelocationModifiers(BaseSettings):
     base_probability: int = 20
 
-    experience_modifiers: dict[int, int | float] = {
-        1: -30,  # junior
-        2: +10,  # middle
-        3: +30,  # senior
-        4: +40,  # lead, architect
+    experience_modifiers: dict[int, dict[str, str | int]] = {
+        1: {"human_name": "junior", "mod": -30},
+        2: {"human_name": "middle", "mod": +10},
+        3: {"human_name": "senior", "mod": +30},
+        4: {"human_name": "lead/architect", "mod": +40},
     }
 
     tech_modifiers: dict[str, float] = {
@@ -31,6 +31,7 @@ class RelocationModifiers(BaseSettings):
         "flask": 0.645,
     }
 
+    # Maybe adjust later
     geography_modifiers: dict[str, int | float] = {
         # Europe
         "Eastern Europe": +10,  # Высокая вероятность из-за популярности релокации в регионе
@@ -61,19 +62,21 @@ class RelocationModifiers(BaseSettings):
         "New Zealand": +7.5,  # Схожа с Австралией, но рынок меньше
     }
 
-    language_modifiers: dict[str, int | float] = {
-        "beginner": -20,
-        "intermediate": +10,
-        "advanced": +20,
+    language_modifiers: dict[int, dict[str, str | int]] = {
+        1: {"human_name": "beginner", "mod": -20},
+        2: {"human_name": "intermediate", "mod": +10},
+        3: {"human_name": "advanced", "mod": +20},
     }
 
-    savings_modifiers: dict[str, int | float] = {
-        "low": -20,  # <1 mounth
-        "medium": -10,  # 1>=3 mounths
-        "high": +10,  # >3 mounths
+    savings_modifiers: dict[int, dict[str, str | int]] = {
+        1: {"human_name": "low", "mod": -20},  # <1 month
+        2: {"human_name": "medium", "mod": -10},  # 1 >= 3 months
+        3: {"human_name": "high", "mod": +10},  # >3 months
     }
-
     dependents_modifiers: dict[str, int | float] = {
         "adult": -5.5,
         "child": -10,
     }
+
+
+relocation_modifiers = RelocationModifiers()
