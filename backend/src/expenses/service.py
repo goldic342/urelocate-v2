@@ -3,14 +3,19 @@ from bs4 import BeautifulSoup
 import re
 import json
 
-from src.expenses.models import CostOfItem, CostRange, LivingCostOfCountry
+
+from backend.src.expenses import categorize
+from src.expenses.config import living_cost_multipliers
+from src.expenses.models import (
+    CostOfItem,
+    CostRange,
+    LivingCostOfCountry,
+    MonthlyCostSchema,
+)
+from src.expenses.categorize import ExpenseCategorizer
 
 
 class ExpensesService:
-    """
-    A class to scrape cost of living data from Numbeo website.
-    """
-
     @staticmethod
     def _normalize_country_name(country: str) -> str:
         """
@@ -72,12 +77,10 @@ class ExpensesService:
                         range_text = cols[2].get_text(strip=True)
                         range_parts = range_text.split("-")
                         range_low = (
-                            range_parts[0].strip() if len(
-                                range_parts) > 0 else None
+                            range_parts[0].strip() if len(range_parts) > 0 else None
                         )
                         range_high = (
-                            range_parts[1].strip() if len(
-                                range_parts) > 1 else None
+                            range_parts[1].strip() if len(range_parts) > 1 else None
                         )
 
                         if item and cost:
@@ -85,7 +88,7 @@ class ExpensesService:
                                 CostOfItem(
                                     item=item,
                                     cost=float(cost),
-                                    const_range=CostRange(
+                                    cost_range=CostRange(
                                         low=range_low, high=range_high
                                     ),
                                 )
@@ -96,6 +99,83 @@ class ExpensesService:
         return LivingCostOfCountry(
             name=normalized_country.replace("-", " "), currency=currency, costs=costs
         )
+
+    def _get_item_cost(self, item: CostOfItem) -> float:
+        """
+        Extract cost from a CostOfItem, prioritizing the 'cost' field
+        """
+        if item.cost is not None:
+            return float(item.cost)
+        if item.cost_range and item.cost_range.low is not None:
+            return float(item.cost_range.low)
+        return 0.0
+
+    def __calculate_monthly_costs(
+        self,
+        data: LivingCostOfCountry,
+        multipliers: dict[str, float],
+        additional_costs: dict[str, float] = {},
+        people_multiplier: int = 1,
+    ) -> dict[str, float]:
+        """
+        Calculate monthly costs based on given multipliers and additional costs
+        """
+        monthly_costs: dict[str, int | float] = {}
+        additional_costs = additional_costs or {}
+
+        for item in data.costs:
+            # Check if item has a multiplier
+            if item.item in multipliers:
+                cost = self._get_item_cost(item)
+
+                monthly_cost = cost * multipliers[item.item] * 30  # daily * 30 days
+                monthly_costs[item.item] = round(monthly_cost, 2) * people_multiplier
+
+        for key, value in additional_costs.items():
+            # Find the item in costs
+            matching_item = next(
+                (item for item in data.costs if item.item == key), None
+            )
+            if matching_item:
+                cost = self._get_item_cost(matching_item)
+
+                monthly_costs[key] = round(cost * value, 2) * people_multiplier
+
+        return monthly_costs
+
+    async def get_monthly_living_costs(
+        self,
+        country: str,
+        currency: str = "USD",
+        children_count: int = 0,
+        adult_count: int = 1,
+    ) -> MonthlyCostSchema:
+        """
+        Get monthly living costs for adult and child
+        """
+
+        living_cost_data = await self.country_cost_of_living(
+            country=country, currency=currency
+        )
+
+        child_monthly_expenses = self.__calculate_monthly_costs(
+            living_cost_data,
+            living_cost_multipliers.child_multipliers,
+            living_cost_multipliers.child_additional_costs,
+            people_multiplier=children_count,
+        )
+        adult_monthly_expenses = self.__calculate_monthly_costs(
+            living_cost_data,
+            living_cost_multipliers.adult_multipliers,
+            people_multiplier=adult_count,
+        )
+
+        total_expenses = {}
+        for k, v in child_monthly_expenses.items():
+            if k in adult_monthly_expenses:
+                total_expenses[k] = v + adult_monthly_expenses[k]
+
+        return ExpenseCategorizer().categorize_expenses(total_expenses)
 
 
 if __name__ == "__main__":

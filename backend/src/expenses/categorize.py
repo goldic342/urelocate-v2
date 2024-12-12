@@ -7,7 +7,7 @@ class ExpenseCategorizer:
     Categorization helper for living expenses
     """
 
-    # Comprehensive mapping of items to categories
+    # TODO: move to a config file, (lazy rn)
     _EXPENSE_CATEGORY_MAP = {
         # Food Categories
         ExpenseCategory.FOOD: [
