@@ -11,6 +11,7 @@ class RelocationModifiers(BaseSettings):
 
     class RegionsMod(TypedDict):
         countries: list[str]
+        language_coefficient: int | float
         mod: int | float
 
     experience_modifiers: dict[int, HumanNameMod] = {
@@ -56,6 +57,7 @@ class RelocationModifiers(BaseSettings):
                 "Lithuania",
             ],
             "mod": 10,
+            "language_coefficient": 8,
         },
         "Western Europe": {
             "countries": [
@@ -68,6 +70,7 @@ class RelocationModifiers(BaseSettings):
                 "Austria",
             ],
             "mod": 5,
+            "language_coefficient": 4,
         },
         "Northern Europe": {
             "countries": [
@@ -79,6 +82,7 @@ class RelocationModifiers(BaseSettings):
                 "Ireland",
             ],
             "mod": 10,
+            "language_coefficient": 6,
         },
         "Southern Europe": {
             "countries": [
@@ -92,9 +96,10 @@ class RelocationModifiers(BaseSettings):
                 "Malta",
             ],
             "mod": -5,
+            "language_coefficient": 7,
         },
-        "USA": {"countries": ["USA"], "mod": -20},
-        "Canada": {"countries": ["Canada"], "mod": 15},
+        "USA": {"countries": ["USA"], "mod": -20, "language_coefficient": 1},
+        "Canada": {"countries": ["Canada"], "mod": 15, "language_coefficient": 2},
         "Latin America": {
             "countries": [
                 "Mexico",
@@ -107,13 +112,19 @@ class RelocationModifiers(BaseSettings):
                 "Ecuador",
             ],
             "mod": 10,
+            "language_coefficient": 8,
         },
         "India": {
             "countries": ["India", "Pakistan", "Bangladesh", "Sri Lanka"],
             "mod": 15,
+            "language_coefficient": 9,
         },
-        "China": {"countries": ["China", "Taiwan", "Hong Kong"], "mod": -15},
-        "Japan": {"countries": ["Japan"], "mod": 2},
+        "China": {
+            "countries": ["China", "Taiwan", "Hong Kong"],
+            "mod": -15,
+            "language_coefficient": 10,
+        },
+        "Japan": {"countries": ["Japan"], "mod": 2, "language_coefficient": 10},
         "Southeast Asia": {
             "countries": [
                 "Thailand",
@@ -126,12 +137,14 @@ class RelocationModifiers(BaseSettings):
                 "Myanmar",
             ],
             "mod": 5,
+            "language_coefficient": 7,
         },
-        "Israel": {"countries": ["Israel"], "mod": 5},
-        "Turkey": {"countries": ["Turkey"], "mod": 10},
+        "Israel": {"countries": ["Israel"], "mod": 5, "language_coefficient": 6},
+        "Turkey": {"countries": ["Turkey"], "mod": 10, "language_coefficient": 7},
         "North Africa": {
             "countries": ["Egypt", "Morocco", "Algeria", "Tunisia", "Libya"],
             "mod": 5,
+            "language_coefficient": 8,
         },
         "Sub-Saharan Africa": {
             "countries": [
@@ -144,10 +157,16 @@ class RelocationModifiers(BaseSettings):
                 "Tanzania",
             ],
             "mod": 10,
+            "language_coefficient": 6,
         },
-        "Australia": {"countries": ["Australia"], "mod": 12},
-        "New Zealand": {"countries": ["New Zealand"], "mod": 7.5},
+        "Australia": {"countries": ["Australia"], "mod": 12, "language_coefficient": 2},
+        "New Zealand": {
+            "countries": ["New Zealand"],
+            "mod": 7.5,
+            "language_coefficient": 2,
+        },
     }
+
     language_modifiers: dict[int, HumanNameMod] = {
         1: {"human_name": "beginner", "mod": -20},
         2: {"human_name": "intermediate", "mod": +10},
