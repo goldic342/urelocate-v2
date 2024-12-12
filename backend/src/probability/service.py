@@ -6,7 +6,7 @@ from src.vacancies.config import vacancies_config
 from src.expenses.service import ExpensesService
 
 
-class RelocationCalculcationService:
+class RelocationProbabilityService:
     @staticmethod
     def __get_mod(path: Any, data: Any) -> int | float:
         return path.model_dump().get(data, {}).get("mod", 0)

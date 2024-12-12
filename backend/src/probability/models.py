@@ -25,3 +25,17 @@ class UserData(BaseModel):
     savings: int  # in USD
     tech_stack: UserTechStack
     dependents: Dependents
+
+
+class UserDataInput(BaseModel):
+    # Mostly copied
+    from_county: str
+    to_country: str
+    expirience_level: int = Field(ge=1, le=4)
+    local_lang_level: int = Field(ge=1, le=3)
+    english_level: int = Field(ge=1, le=3)
+    savings: int  # in USD
+    tech_stack_scope: Literal["frontend", "backend", "devops", "mobile"]
+    # Validated on frontend, no strict rules, if not found - ignored
+    tools: list[str]
+    dependents: Dependents
