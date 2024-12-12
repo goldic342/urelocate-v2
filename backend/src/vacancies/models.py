@@ -29,10 +29,10 @@ class VacanciesList(BaseModel):
 
 class Technology(BaseModel):
     name: str
-    icon: HttpUrl
+    icon: HttpUrl | str
 
 
-class TechStack(BaseModel):
+class TechStackList(BaseModel):
     frontend: list[Technology]
     backend: list[Technology]
     devops: list[Technology]
