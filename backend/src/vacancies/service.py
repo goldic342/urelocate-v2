@@ -4,7 +4,7 @@ from src.config import settings
 from src.vacancies.config import vacancies_config
 from bs4 import BeautifulSoup
 from typing import Any, Literal
-from src.vacancies.models import VacanciesList, Vacancy
+from src.vacancies.models import Technology, VacanciesList, Vacancy
 import re
 
 
@@ -115,8 +115,7 @@ class VacanciesService:
     def get_relocation_vacancies(
         self,
         stack: str,
-        technologies: list[str],
-        *args,
+        technologies: list[Technology],
         **kwargs,
     ):
         """
@@ -127,7 +126,7 @@ class VacanciesService:
             keywords=[
                 vacancies_config.base_relocation_keyword,
                 stack,
-                *technologies,
+                *[item.name for item in technologies],
             ],
             **kwargs,
         )

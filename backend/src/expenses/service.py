@@ -4,7 +4,6 @@ import re
 import json
 
 
-from backend.src.expenses import categorize
 from src.expenses.config import living_cost_multipliers
 from src.expenses.models import (
     CostOfItem,
