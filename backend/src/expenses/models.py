@@ -9,10 +9,21 @@ class CostRange(BaseModel):
 class CostOfItem(BaseModel):
     item: str
     cost: float | int | None = None
-    const_range: CostRange
+    cost_range: CostRange
 
 
 class LivingCostOfCountry(BaseModel):
     name: str
     currency: str
     costs: list[CostOfItem]
+
+
+class CategorySchema(BaseModel):
+    name: str
+    category_sum: int | float
+    items: dict[str, float | int]
+
+
+class MonthlyCostSchema(BaseModel):
+    total_sum: int | float
+    categories: list[CategorySchema] | None = None
