@@ -1,4 +1,3 @@
-from os import name
 import httpx
 from bs4 import BeautifulSoup
 import re
@@ -62,8 +61,12 @@ class ExpensesService:
 
                         cost_text = cols[1].get_text(strip=True)
                         cost_match = re.search(r"([\d,.]+)", cost_text)
-                        cost: float | int = cost_match.group(
-                            1) if cost_match else None
+                        cost = cost_match.group(1) if cost_match else None
+
+                        try:
+                            cost = float(cost)  # type: ignore
+                        except ValueError:
+                            cost = None
 
                         # Extract range
                         range_text = cols[2].get_text(strip=True)
@@ -81,7 +84,7 @@ class ExpensesService:
                             costs.append(
                                 CostOfItem(
                                     item=item,
-                                    cost=cost,
+                                    cost=float(cost),
                                     const_range=CostRange(
                                         low=range_low, high=range_high
                                     ),
