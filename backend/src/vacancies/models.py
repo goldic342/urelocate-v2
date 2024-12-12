@@ -29,7 +29,7 @@ class VacanciesList(BaseModel):
 
 class Technology(BaseModel):
     name: str
-    icon: HttpUrl | str
+    icon: HttpUrl | str | None = None
 
 
 class TechStackList(BaseModel):

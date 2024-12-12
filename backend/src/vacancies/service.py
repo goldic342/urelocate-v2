@@ -1,7 +1,7 @@
 from careerjet_api import CareerjetAPIClient
 
 from src.config import settings
-from src.vacancies.config import vacancies_settings
+from src.vacancies.config import vacancies_config
 from bs4 import BeautifulSoup
 from typing import Any, Literal
 from src.vacancies.models import VacanciesList, Vacancy
@@ -86,10 +86,10 @@ class VacanciesService:
             return matches
 
         supported_matches = advanced_keyword_match(
-            vacancies_settings.relocation_keywords_supported, clean_text
+            vacancies_config.relocation_keywords_supported, clean_text
         )
         unsupported_matches = advanced_keyword_match(
-            vacancies_settings.relocation_keywords_not_supported, clean_text
+            vacancies_config.relocation_keywords_not_supported, clean_text
         )
 
         total_supported_score = sum(
@@ -125,7 +125,7 @@ class VacanciesService:
         """
         api_response = self.__get_vacancies(
             keywords=[
-                vacancies_settings.base_relocation_keyword,
+                vacancies_config.base_relocation_keyword,
                 stack,
                 *technologies,
             ],

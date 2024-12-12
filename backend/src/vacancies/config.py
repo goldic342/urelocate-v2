@@ -3,7 +3,7 @@ from pydantic import HttpUrl
 from src.vacancies.models import TechStackList, Technology
 
 
-class VacanciesSettings(BaseSettings):
+class VacanciesConfig(BaseSettings):
     base_relocation_keyword: str = "relocation"
 
     relocation_keywords_supported: list[str] = [
@@ -302,4 +302,4 @@ class VacanciesSettings(BaseSettings):
     )
 
 
-vacancies_settings = VacanciesSettings()
+vacancies_config = VacanciesConfig()
