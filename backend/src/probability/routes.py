@@ -4,7 +4,7 @@ from src.probability.config import relocation_modifiers
 router = APIRouter(prefix="/probability-config")
 
 
-@router.get("/", response_model=list[str])
+@router.get("/countries", response_model=list[str])
 async def get_countires():
     countires = []
 
