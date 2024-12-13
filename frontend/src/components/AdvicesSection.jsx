@@ -4,9 +4,7 @@ const AdvicesSection = ({ advices, specialAdvice, specialAdviceButton }) => {
   return (
     <Flex direction={'column'} justify={'center'} align={'center'}>
       <Flex direction={'column'} gap={7}>
-        <Heading alignSelf={'flex-start'} ml={{ md: 10, sm: 5 }}>
-          Советы
-        </Heading>
+        <Heading alignSelf={'flex-start'}>Советы</Heading>
         <VStack spacing={4} align="stretch">
           {advices.map((item, index) => (
             <Box
