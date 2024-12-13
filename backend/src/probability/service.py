@@ -10,6 +10,13 @@ from src.expenses.service import ExpensesService
 
 class RelocationProbabilityService:
     @staticmethod
+    def __region_by_country(country: str) -> str | None:
+        for name, region in relocation_modifiers.geography_modifiers.items():
+            for country in region["countries"]:  # type: ignore
+                if country.lower() == country.lower():
+                    return name
+
+    @staticmethod
     def __get_mod(path: BaseModel | dict, data: Any) -> int | float:
         if isinstance(path, dict):
             return path.get(data, {}).get("mod", 0)
@@ -33,19 +40,18 @@ class RelocationProbabilityService:
 
         return total
 
-    @staticmethod
-    def __calc_geography_mod(user_country: str) -> int | float:
-        for region in relocation_modifiers.geography_modifiers.values():
-            for country in region["countries"]:  # type: ignore
-                if user_country == country:
-                    return region["mod"]  # type: ignore
+    def __calc_geography_mod(self, user_country: str) -> int | float:
+        region = self.__region_by_country(user_country)
+        if not region:
+            raise ValueError("Country not in list")
 
-        raise ValueError("Country not in list")
+        return relocation_modifiers.geography_modifiers[region]["mod"]
 
     @staticmethod
     def __calc_language_mod(user_data: UserData, region: str) -> int | float:
-        region_mod = relocation_modifiers.geography_modifiers[region]["mod"]
-        lang_coef = relocation_modifiers.geography_modifiers[region][
+        region_mod = relocation_modifiers.geography_modifiers[region.lower(
+        )]["mod"]
+        lang_coef = relocation_modifiers.geography_modifiers[region.lower()][
             "language_coefficient"
         ]
         user_mod = relocation_modifiers.language_modifiers[user_data.local_lang_level][
@@ -87,10 +93,12 @@ class RelocationProbabilityService:
         # TODO: add vacancies consideration, no time rn
         modifiers += self.__calc_technolohies_mod(user_data.tech_stack)
         modifiers += self.__calc_geography_mod(user_data.to_country)
-        modifiers += self.__calc_language_mod(user_data, user_data.to_country)
+        modifiers += self.__calc_language_mod(
+            user_data, self.__region_by_country(user_data.to_country)
+        )
         modifiers += await self.__calc_finance_mod(user_data)
 
         final_probability = relocation_modifiers.base_probability + modifiers
 
         # Please do not be alwas ~100% 🙏
-        return max(0, min(100, final_probability))
+        return max(0, min(100, round(final_probability, 3)))
