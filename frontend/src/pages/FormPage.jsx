@@ -22,7 +22,7 @@ const FormPage = () => {
         </Text>
       </Flex>
       <Box mt={62}>
-        <Form formData={loaderData} />
+        <Form formValues={loaderData} />
       </Box>
     </Container>
   )

@@ -2,6 +2,7 @@ import { Box } from '@chakra-ui/react'
 import Header from './Header'
 import { Outlet } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import Footer from './Footer'
 
 const Root = ({ children }) => {
   return (
@@ -9,6 +10,9 @@ const Root = ({ children }) => {
       <Header />
       <Outlet />
       {children}
+      <Box mt={28}>
+        <Footer />
+      </Box>
     </>
   )
 }

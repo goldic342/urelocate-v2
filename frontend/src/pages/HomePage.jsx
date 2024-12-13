@@ -29,11 +29,10 @@ const HomePage = () => {
             <FeaturesCheckList />
           </Box>
         </Box>
-        <Box mt={18} mb={28}>
+        <Box mt={18}>
           <CTA />
         </Box>
       </Container>
-      <Footer />
     </>
   )
 }
