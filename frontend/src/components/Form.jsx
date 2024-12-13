@@ -11,6 +11,7 @@ import LangLevelSelect from './ui/Inputs/LangLevelSelect'
 import HInputsWrapper from './ui/Inputs/HInputsWrapper'
 import { useState } from 'react'
 import SimpleNumberInput from './ui/Inputs/SimpleNumberInput'
+import { useNavigate } from 'react-router-dom'
 
 const validateForm = (formData) => {
   const errors = {}
@@ -58,6 +59,7 @@ const validateForm = (formData) => {
 }
 
 const Form = ({ formValues }) => {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     fromCountry: '',
     toCountry: '',
@@ -93,7 +95,8 @@ const Form = ({ formValues }) => {
       return
     }
 
-    console.log('Form submitted', formData)
+    const base64Params = btoa(JSON.stringify(formData))
+    navigate(`/report?q=${base64Params}`)
   }
 
   return (
