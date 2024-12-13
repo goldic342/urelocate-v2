@@ -1,5 +1,5 @@
-from os import stat
-from typing import Any, final
+from typing import Any
+from fastapi.exceptions import HTTPException
 
 from pydantic import BaseModel
 from src.probability.models import UserData, UserTechStack
@@ -10,11 +10,13 @@ from src.expenses.service import ExpensesService
 
 class RelocationProbabilityService:
     @staticmethod
-    def __region_by_country(country: str) -> str | None:
+    def __region_by_country(country: str) -> str:
         for name, region in relocation_modifiers.geography_modifiers.items():
             for country in region["countries"]:  # type: ignore
                 if country.lower() == country.lower():
                     return name
+
+        raise ValueError("Country not in list")
 
     @staticmethod
     def __get_mod(path: BaseModel | dict, data: Any) -> int | float:
@@ -92,10 +94,14 @@ class RelocationProbabilityService:
 
         # TODO: add vacancies consideration, no time rn
         modifiers += self.__calc_technolohies_mod(user_data.tech_stack)
-        modifiers += self.__calc_geography_mod(user_data.to_country)
-        modifiers += self.__calc_language_mod(
-            user_data, self.__region_by_country(user_data.to_country)
-        )
+        try:
+            modifiers += self.__calc_geography_mod(user_data.to_country)
+            modifiers += self.__calc_language_mod(
+                user_data, self.__region_by_country(user_data.to_country)
+            )
+        except ValueError as e:
+            raise HTTPException(status_code=404, detail=str(e))
+
         modifiers += await self.__calc_finance_mod(user_data)
 
         final_probability = relocation_modifiers.base_probability + modifiers

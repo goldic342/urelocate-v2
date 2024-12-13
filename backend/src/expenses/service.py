@@ -1,3 +1,4 @@
+from fastapi.exceptions import HTTPException
 import httpx
 from bs4 import BeautifulSoup
 import re
@@ -41,21 +42,10 @@ class ExpensesService:
 
         return choice(user_agents)
 
-    async def country_cost_of_living(
-        self, country: str, currency: str = "USD"
-    ) -> LivingCostOfCountry:
-        """
-        Asynchronously retrieve cost of living data for a given country from Numbeo.
-
-        :param country: Name of the country
-        :param currency: Currency to display costs in (default: CAD)
-        :return: Dictionary containing country, currency, and cost of living data
-        """
-        normalized_country = self._normalize_country_name(country)
-
+    async def __get_exp_table(self, country: str, currency: str = "USD"):
         url = (
             "https://www.numbeo.com/cost-of-living/country_result.jsp"
-            f"?country={normalized_country}&displayCurrency={currency}"
+            f"?country={country}&displayCurrency={currency}"
         )
         async with httpx.AsyncClient(
             headers={"User-Agent": self.__gen_random_user_agent()}
@@ -67,55 +57,77 @@ class ExpensesService:
                 raise ValueError(f"Error fetching data: {e}")
 
         soup = BeautifulSoup(response.text, "html.parser")
+        return soup.find("table", class_="data_wide_table")
 
-        # TODO: fix different tables, setup
-        table = soup.find("table", class_="data_wide_table")
+    async def country_cost_of_living(
+        self, country: str, currency: str = "USD"
+    ) -> LivingCostOfCountry:
+        """
+        Asynchronously retrieve cost of living data for a given country from Numbeo.
+
+        :param country: Name of the country
+        :param currency: Currency to display costs in (default: CAD)
+        :return: Dictionary containing country, currency, and cost of living data
+        """
+
+        normalized_country = self._normalize_country_name(country)
+        table = None
+
+        for i in range(2):
+            table = await self.__get_exp_table(normalized_country)
+            if table:
+                break
+
+        if not table:
+            raise HTTPException(
+                status_code=401, detail="Table not found ont web-page, try again later"
+            )
 
         costs: list[CostOfItem] = []
-        if table:
-            rows = table.find_all("tr")[1:]  # type: ignore
-            for row in rows:
-                cols = row.find_all("td")
-                if len(cols) >= 3:
+        rows = table.find_all("tr")[1:]  # type: ignore
+
+        for row in rows:
+            cols = row.find_all("td")
+            if len(cols) >= 2:
+                try:
+                    # Extract item name
+                    item = cols[0].get_text(strip=True)
+
+                    cost_text = cols[1].get_text(strip=True)
+                    cost_match = re.search(r"([\d,.]+)", cost_text)
+                    cost = cost_match.group(1) if cost_match else None
+
                     try:
-                        # Extract item name
-                        item = cols[0].get_text(strip=True)
+                        cost = float(cost.replace(",", ""))  # type: ignore
+                    except ValueError:
+                        cost = None
 
-                        cost_text = cols[1].get_text(strip=True)
-                        cost_match = re.search(r"([\d,.]+)", cost_text)
-                        cost = cost_match.group(1) if cost_match else None
+                    # Extract range
+                    range_text = cols[2].get_text(strip=True)
+                    range_parts = range_text.split("-")
+                    range_low = (
+                        range_parts[0].strip().replace(",", "")
+                        if len(range_parts) > 0
+                        else None
+                    )
+                    range_high = (
+                        range_parts[1].strip().replace(",", "")
+                        if len(range_parts) > 1
+                        else None
+                    )
 
-                        try:
-                            cost = float(cost.replace(",", ""))  # type: ignore
-                        except ValueError:
-                            cost = None
-
-                        # Extract range
-                        range_text = cols[2].get_text(strip=True)
-                        range_parts = range_text.split("-")
-                        range_low = (
-                            range_parts[0].strip().replace(",", "")
-                            if len(range_parts) > 0
-                            else None
-                        )
-                        range_high = (
-                            range_parts[1].strip().replace(",", "")
-                            if len(range_parts) > 1
-                            else None
-                        )
-
-                        if item and cost:
-                            costs.append(
-                                CostOfItem(
-                                    item=item,
-                                    cost=float(cost),
-                                    cost_range=CostRange(
-                                        low=range_low or None, high=range_high or None
-                                    ),
-                                )
+                    if item and cost:
+                        costs.append(
+                            CostOfItem(
+                                item=item,
+                                cost=float(cost),
+                                cost_range=CostRange(
+                                    low=range_low or None, high=range_high or None
+                                ),
                             )
-                    except Exception as e:
-                        print(f"Error parsing row: {e}")
+                        )
+                except Exception as e:
+                    print(f"Error parsing row: {e}")
 
         return LivingCostOfCountry(
             name=normalized_country.replace("-", " "), currency=currency, costs=costs
