@@ -30,6 +30,7 @@ const ExpensesSection = ({ expenses }) => {
       <Flex
         direction={{ base: 'column', md: 'row' }}
         borderRadius="2xl"
+        pr={3}
         gap={6}
         position="relative"
         overflow="hidden"
