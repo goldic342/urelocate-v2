@@ -1,4 +1,4 @@
-import { Container, Button, Flex, Box } from '@chakra-ui/react'
+import { Container, Button, Flex, Box, Text } from '@chakra-ui/react'
 import PercentProgress from '../components/ui/PercentProgress'
 import { useSearchParams } from 'react-router-dom'
 import AdvicesSection from '../components/AdvicesSection'
@@ -8,8 +8,17 @@ const ReportPage = () => {
 
   return (
     <Container maxW={'6xl'}>
-      <Flex justify={'center'} align={'center'} mt={28} mb={20}>
+      <Flex
+        justify={'center'}
+        direction={'column'}
+        align={'center'}
+        mt={28}
+        mb={20}
+      >
         <PercentProgress value={90} />
+        <Text mt={5} color={'gray.500'} maxW={52} textAlign="center">
+          Ваш процентный шанс на успешную релокацию
+        </Text>
       </Flex>
       <AdvicesSection
         advices={[
