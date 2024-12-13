@@ -10,13 +10,19 @@ const CountrySelect = ({ countryList }) => {
   // TODO: add icons for countries, need new config on backend
   return (
     <AutoComplete openOnFocus>
-      <AutoCompleteInput variant="filled" />
+      <AutoCompleteInput variant="outline" />
       <AutoCompleteList>
         {countryList.map((country) => (
           <AutoCompleteItem
             key={`option-${country}`}
             value={country}
             textTransform="capitalize"
+            _selected={{
+              bg: 'cyan.100'
+            }}
+            _focus={{
+              bg: 'cyan.100'
+            }}
             align="center"
           >
             {/*

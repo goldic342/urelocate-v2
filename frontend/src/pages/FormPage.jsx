@@ -1,11 +1,11 @@
-import { Container, Heading, Text, Flex } from '@chakra-ui/react'
+import { Container, Heading, Text, Flex, Box } from '@chakra-ui/react'
 import Form from '../components/Form'
 import { useLoaderData } from 'react-router-dom'
 
 const FormPage = () => {
   const loaderData = useLoaderData()
   return (
-    <Container>
+    <Container maxW={'6xl'}>
       <Flex justify={'center'} direction={'column'} align={'center'} mt={92}>
         <Heading textAlign={'center'} fontSize={'5xl'}>
           Заполните форму
@@ -21,7 +21,9 @@ const FormPage = () => {
           вакансии и многое другое.
         </Text>
       </Flex>
-      <Form formData={loaderData} />
+      <Box mt={62}>
+        <Form formData={loaderData} />
+      </Box>
     </Container>
   )
 }

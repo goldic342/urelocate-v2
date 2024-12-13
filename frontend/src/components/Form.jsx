@@ -1,17 +1,22 @@
-import { Box, Flex } from '@chakra-ui/react'
+import { Box, Flex, FormControl, FormLabel } from '@chakra-ui/react'
 import CountrySelect from './ui/Inputs/CountryInput'
 
 const Form = ({ formData }) => {
   console.log(formData)
   return (
-    <Flex>
-      <CountrySelect countryList={formData.countries} />
-      <Box></Box>
-      <Box></Box>
-      <input type="" name="" value="" />
-      <Box></Box>
-      <input type="" name="" value="" />
-      <Box></Box>
+    <Flex justify={'center'} align={'center'} gap={20}>
+      <Flex direction={'column'}>
+        <FormControl>
+          <FormLabel>Где вы живете?</FormLabel>
+          <CountrySelect countryList={formData.countries} />
+        </FormControl>
+      </Flex>
+      <Flex direction={'column'}>
+        <FormControl>
+          <FormLabel>Куда хотите перехать</FormLabel>
+          <CountrySelect countryList={formData.countries} />
+        </FormControl>
+      </Flex>
     </Flex>
   )
 }
