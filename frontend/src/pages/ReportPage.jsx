@@ -3,6 +3,7 @@ import PercentProgress from '../components/ui/PercentProgress'
 import { useSearchParams } from 'react-router-dom'
 import AdvicesSection from '../components/AdvicesSection'
 import ExpensesSection from '../components/ExpensesSection'
+import VacanciesSection from '../components/VacanciesSection'
 
 const ReportPage = () => {
   const [searchParams] = useSearchParams()
@@ -86,6 +87,51 @@ const ReportPage = () => {
           }}
         />
       </Box>
+
+      <VacanciesSection
+        vacancies={{
+          jobs: [
+            {
+              locations: 'Canada',
+              site: '',
+              date: 'Wed, 27 Nov 2024 23:15:42 GMT',
+              url: 'https://jobviewtrack.com/en-gb/job-1f4e417e42021b19460645432d0f090e0b45111a6b3e4549544148443c01410057021a046c2a0a421d040c536f455a4443010a1c25314e04010f0b02172227070f075d4a4f482c5159/5af19556d557721d2497e72bf207ad60.html?affid=1b821501e405ac3931bff4829d554dad',
+              title: 'Staff Software Engineer - Mobile Platform',
+              description:
+                ' and impact teams across the company.   We use <b>React</b> Native, Typescript, Redux, and GraphQL for our mobile apps, and Golang... for our backend. Applicants should expect an even split between backend and <b>frontend</b> work in this role.   This is a remote position...',
+              company: 'Samsara',
+              salary: '',
+              salary_min: null,
+              salary_max: null,
+              salary_type: null,
+              salary_currency_code: null,
+              has_relocation: true
+            },
+            {
+              locations: 'Montreal, QC',
+              site: '',
+              date: 'Sat, 23 Nov 2024 07:18:21 GMT',
+              url: 'https://jobviewtrack.com/en-gb/job-1b4a416b5808034e7400410003412a0213451807191658296e48430d001c073045150d0d01170052762e1c1f460b6e594c07046c63115606040e1e021722270d071a45593c1919525b/fbc220b0d3c3f6f7e98d20cc9c13cbcf.html?affid=1b821501e405ac3931bff4829d554dad',
+              title:
+                'Développer de logiciel Full Stack / Senior Full Stack Developer',
+              description:
+                '/TypeScript avec <b>React</b> et Next.js pour le front-end  De solides compétences en matière de résolution de problèmes... both backend and <b>frontend</b> are scalable, efficient, and future-proof.  Ensure performance, scalability, and reliability through...',
+              company: 'Unity Technologies',
+              salary: '',
+              salary_min: null,
+              salary_max: null,
+              salary_type: null,
+              salary_currency_code: null,
+              has_relocation: false
+            }
+          ],
+          pages: 1,
+          hits: 2,
+          hits_relocation: 1,
+          response_type: 'JOBS',
+          response_time: 0.0227069854736328
+        }}
+      />
     </Container>
   )
 }
