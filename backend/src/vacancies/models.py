@@ -37,4 +37,3 @@ class TechStackList(BaseModel):
     backend: list[Technology]
     devops: list[Technology]
     mobile: list[Technology]
-    database: list[Technology]

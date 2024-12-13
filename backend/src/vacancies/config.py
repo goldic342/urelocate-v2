@@ -73,8 +73,7 @@ class VacanciesConfig(BaseSettings):
                 icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webpack/webpack-original.svg",
             ),
             Technology(name="Vite", icon="https://vitejs.dev/logo.svg"),
-            Technology(name="Parcel",
-                       icon="https://parceljs.org/favicon.a4b04f34.svg"),
+            Technology(name="Parcel", icon="https://parceljs.org/favicon.a4b04f34.svg"),
             Technology(
                 name="Jest",
                 icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg",
@@ -83,8 +82,7 @@ class VacanciesConfig(BaseSettings):
                 name="Mocha",
                 icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mocha/mocha-plain.svg",
             ),
-            Technology(name="Cypress",
-                       icon="https://www.cypress.io/img/favicon.ico"),
+            Technology(name="Cypress", icon="https://www.cypress.io/img/favicon.ico"),
             Technology(
                 name="Bootstrap",
                 icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg",
@@ -127,10 +125,8 @@ class VacanciesConfig(BaseSettings):
                 name="Flask",
                 icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg",
             ),
-            Technology(name="Express",
-                       icon="https://expressjs.com/images/favicon.png"),
-            Technology(name="Spring Boot",
-                       icon="https://spring.io/images/favicon.ico"),
+            Technology(name="Express", icon="https://expressjs.com/images/favicon.png"),
+            Technology(name="Spring Boot", icon="https://spring.io/images/favicon.ico"),
             Technology(
                 name="Ruby on Rails",
                 icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rails/rails-original-wordmark.svg",
@@ -162,8 +158,7 @@ class VacanciesConfig(BaseSettings):
             ),
             Technology(name="gRPC", icon="https://grpc.io/img/favicon.png"),
             Technology(name="JWT", icon="https://jwt.io/img/pic_logo.svg"),
-            Technology(
-                name="OAuth", icon="https://oauth.net/images/oauth-icon.png"),
+            Technology(name="OAuth", icon="https://oauth.net/images/oauth-icon.png"),
             Technology(
                 name="Passport.js", icon="http://www.passportjs.org/images/favicon.png"
             ),
@@ -205,8 +200,7 @@ class VacanciesConfig(BaseSettings):
             Technology(
                 name="Grafana", icon="https://grafana.com/static/img/favicon.ico"
             ),
-            Technology(name="New Relic",
-                       icon="https://newrelic.com/favicon.ico"),
+            Technology(name="New Relic", icon="https://newrelic.com/favicon.ico"),
             Technology(
                 name="Git",
                 icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
@@ -225,8 +219,7 @@ class VacanciesConfig(BaseSettings):
                 name="Flutter",
                 icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg",
             ),
-            Technology(
-                name="Ionic", icon="https://ionicframework.com/favicon.ico"),
+            Technology(name="Ionic", icon="https://ionicframework.com/favicon.ico"),
             Technology(
                 name="Swift",
                 icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg",
@@ -248,56 +241,7 @@ class VacanciesConfig(BaseSettings):
                 icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg",
             ),
             Technology(name="Realm", icon="https://realm.io/favicon.ico"),
-            Technology(name="Firebase",
-                       icon="https://firebase.google.com/favicon.ico"),
-        ],
-        database=[
-            Technology(
-                name="PostgreSQL",
-                icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
-            ),
-            Technology(
-                name="MySQL",
-                icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
-            ),
-            Technology(
-                name="SQLite",
-                icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg",
-            ),
-            Technology(
-                name="Oracle",
-                icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg",
-            ),
-            Technology(
-                name="MongoDB",
-                icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
-            ),
-            Technology(
-                name="Cassandra",
-                icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cassandra/cassandra-original.svg",
-            ),
-            Technology(name="CouchDB",
-                       icon="https://couchdb.apache.org/favicon.ico"),
-            Technology(name="Firebase",
-                       icon="https://firebase.google.com/favicon.ico"),
-            Technology(
-                name="Elasticsearch",
-                icon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/elasticsearch/elasticsearch-original.svg",
-            ),
-            Technology(
-                name="Solr", icon="https://lucene.apache.org/solr/favicon.ico"),
-            Technology(
-                name="Redshift",
-                icon="https://docs.aws.amazon.com/images/redshift/latest/dg/images/favicon.ico",
-            ),
-            Technology(
-                name="BigQuery",
-                icon="https://cloud.google.com/images/favicons/favicon.ico",
-            ),
-            Technology(
-                name="Snowflake",
-                icon="https://www.snowflake.com/wp-content/themes/snowflake/favicon.ico",
-            ),
+            Technology(name="Firebase", icon="https://firebase.google.com/favicon.ico"),
         ],
     )
 
