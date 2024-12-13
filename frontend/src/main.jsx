@@ -5,6 +5,7 @@ import Root from './components/ui/Root'
 import HomePage from './pages/HomePage'
 import { ChakraProvider } from '@chakra-ui/react'
 import theme from './theme/theme'
+import FormPage from './pages/FormPage'
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />
+      },
+      {
+        path: '/form',
+        element: <FormPage />
       }
     ]
   }
