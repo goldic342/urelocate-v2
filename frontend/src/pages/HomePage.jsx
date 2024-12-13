@@ -19,7 +19,6 @@ const HomePage = () => {
           <Hero />
         </Box>
 
-        <Image src="https://placehold.co/1920x1280" mt={16} />
         <Box maxW={'4xl'}>
           <Box mt={24}>
             <FeaturesSection />

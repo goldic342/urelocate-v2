@@ -270,7 +270,7 @@ const Form = ({ formValues }) => {
           ]}
         />
       </Flex>
-      <Button mt={10} onClick={handleSubmit} colorScheme="blue">
+      <Button mt={10} onClick={handleSubmit} variant={'gradient'}>
         Узнать результаты
       </Button>
     </Flex>

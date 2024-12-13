@@ -7,6 +7,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import theme from './theme/theme'
 import FormPage from './pages/FormPage'
 import { formLoader } from './api/loaders'
+import ReportPage from './pages/ReportPage'
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
         path: '/form',
         element: <FormPage />,
         loader: formLoader
+      },
+      {
+        path: '/report',
+        element: <ReportPage />
       }
     ]
   }

@@ -93,6 +93,39 @@ const components = {
         _hover: {
           bg: 'cyan.50'
         }
+      },
+      gradient: {
+        bg: 'transparent',
+        bgGradient: 'linear(to-r, cyan.400, blue.400)',
+        color: 'white',
+        px: 9,
+        py: 6,
+        position: 'relative',
+        overflow: 'hidden',
+        _before: {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          bgGradient: 'linear(to-r, cyan.400, purple.600)',
+          opacity: 0,
+          transition: 'opacity 0.5s ease',
+          zIndex: -1,
+          filter: 'blur(20px)',
+          borderRadius: 'full'
+        },
+        _hover: {
+          _before: {
+            opacity: 0.5
+          },
+          transform: 'scale(1.02)',
+          boxShadow: 'xl'
+        },
+        _active: {
+          transform: 'scale(0.98)'
+        }
       }
     },
 
