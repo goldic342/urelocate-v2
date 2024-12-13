@@ -4,6 +4,7 @@ from src.vacancies.service import VacanciesService
 from src.probability.models import UserData, UserTechStack
 from src.report_gen.models import Report, UserDataInput
 from src.probability.service import RelocationProbabilityService
+from src.advices.service import AdvicesService
 
 
 class ReportService:
@@ -12,7 +13,8 @@ class ReportService:
             **data.model_dump(),
             tech_stack=UserTechStack(
                 scope=data.tech_stack_scope,
-                tools=[Technology(name=item) for item in data.tech_stack_tools],
+                tools=[Technology(name=item)
+                       for item in data.tech_stack_tools],
             ),
         )
         percentage = await RelocationProbabilityService().calc_propability(user_data)
@@ -27,5 +29,10 @@ class ReportService:
             user_data.dependents.children,
             user_data.dependents.adults,
         )
-
-        return Report(percentage=percentage, vacancies=vacancies, expenses=expenses)
+        advices = AdvicesService().generate_advice(user_data)
+        return Report(
+            percentage=percentage,
+            vacancies=vacancies,
+            expenses=expenses,
+            advices=advices,
+        )

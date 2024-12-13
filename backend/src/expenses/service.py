@@ -73,16 +73,15 @@ class ExpensesService:
         normalized_country = self._normalize_country_name(country)
         table = None
 
-        for i in range(2):
+        for i in range(4):
             table = await self.__get_exp_table(normalized_country)
             if table:
                 break
 
         if not table:
             raise HTTPException(
-                status_code=401, detail="Table not found ont web-page, try again later"
+                status_code=401, detail="Failed to get expenses, try again later"
             )
-
         costs: list[CostOfItem] = []
         rows = table.find_all("tr")[1:]  # type: ignore
 

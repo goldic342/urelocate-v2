@@ -23,5 +23,4 @@ class Report(BaseModel):
     percentage: float
     expenses: MonthlyCostSchema
     vacancies: VacanciesList
-    # TODO: add later
-    # advices: list[str]
+    advices: list[str]
