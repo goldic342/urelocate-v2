@@ -7,11 +7,11 @@ export class ConfigAPI {
       `${API_BASE_URL}/probability-config/countries/`
     )
 
-    return response
+    return await response.data
   }
 
   async techStackList() {
     const response = await axios.get(`${API_BASE_URL}/techstack`)
-    return response
+    return await response.data
   }
 }

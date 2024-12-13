@@ -1,7 +1,9 @@
 import { Container, Heading, Text, Flex } from '@chakra-ui/react'
 import Form from '../components/Form'
+import { useLoaderData } from 'react-router-dom'
 
 const FormPage = () => {
+  const loaderData = useLoaderData()
   return (
     <Container>
       <Flex justify={'center'} direction={'column'} align={'center'} mt={92}>
@@ -19,7 +21,7 @@ const FormPage = () => {
           вакансии и многое другое.
         </Text>
       </Flex>
-      <Form />
+      <Form formData={loaderData} />
     </Container>
   )
 }
