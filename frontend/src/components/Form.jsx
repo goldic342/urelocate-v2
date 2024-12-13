@@ -1,10 +1,11 @@
 import { Box, Flex } from '@chakra-ui/react'
 import CountrySelect from './ui/Inputs/CountryInput'
 
-const Form = () => {
+const Form = ({ formData }) => {
+  console.log(formData)
   return (
     <Flex>
-      <CountrySelect />
+      <CountrySelect countryList={formData.countries} />
       <Box></Box>
       <Box></Box>
       <input type="" name="" value="" />
