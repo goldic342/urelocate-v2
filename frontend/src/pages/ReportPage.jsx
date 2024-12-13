@@ -1,4 +1,4 @@
-import { Container, Button, Flex } from '@chakra-ui/react'
+import { Container, Button, Flex, Box } from '@chakra-ui/react'
 import PercentProgress from '../components/ui/PercentProgress'
 import { useSearchParams } from 'react-router-dom'
 import AdvicesSection from '../components/AdvicesSection'
