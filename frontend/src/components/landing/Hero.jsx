@@ -1,6 +1,8 @@
 import { Box, HStack, Text, Heading, Button } from '@chakra-ui/react'
 import { ArrowRight } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 const Hero = () => {
+  const navigate = useNavigate()
   return (
     <Box>
       <Box
@@ -34,6 +36,7 @@ const Hero = () => {
             pr={7}
             variant={'primary'}
             rightIcon={<ArrowRight size={22} />}
+            onClick={() => navigate('/form')}
           >
             Начать
           </Button>

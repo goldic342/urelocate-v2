@@ -1,7 +1,9 @@
 import { Button, Flex, Heading, Text } from '@chakra-ui/react'
 import { ArrowRight } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 
 const CTA = () => {
+  const navigate = useNavigate()
   return (
     <Flex
       p={12}
@@ -20,7 +22,12 @@ const CTA = () => {
           сделать, сколько потребуется денег и какие приключения тебя ждут в
           новой стране.
         </Text>
-        <Button rightIcon={<ArrowRight />} maxW={'min'} variant={'outline'}>
+        <Button
+          rightIcon={<ArrowRight />}
+          maxW={'min'}
+          variant={'outline'}
+          onClick={() => navigate('/form')}
+        >
           Начать
         </Button>
       </Flex>
