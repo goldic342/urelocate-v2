@@ -9,7 +9,7 @@ class CostRange(BaseModel):
 class CostOfItem(BaseModel):
     item: str
     cost: float | int | None = None
-    cost_range: CostRange
+    cost_range: CostRange | None
 
 
 class LivingCostOfCountry(BaseModel):

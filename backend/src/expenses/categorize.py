@@ -127,7 +127,9 @@ class ExpenseCategorizer:
 
         categories = [
             CategorySchema(
-                name=category.name, category_sum=sum(items.values()), items=items
+                name=category.name.lower(),
+                category_sum=sum(items.values()),
+                items=items,
             )
             for category, items in categorized_expenses.items()
             if items

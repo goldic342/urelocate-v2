@@ -67,6 +67,8 @@ class ExpensesService:
                 raise ValueError(f"Error fetching data: {e}")
 
         soup = BeautifulSoup(response.text, "html.parser")
+
+        # TODO: fix different tables, setup
         table = soup.find("table", class_="data_wide_table")
 
         costs: list[CostOfItem] = []

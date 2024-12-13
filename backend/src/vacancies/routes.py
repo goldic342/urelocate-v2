@@ -7,4 +7,4 @@ router = APIRouter(prefix="/techstack")
 
 @router.get("/", response_model=TechStackList)
 async def get_tech_stack():
-    return TechStackList(**vacancies_config.tech_stack_variants)
+    return vacancies_config.tech_stack_variants

@@ -3,7 +3,7 @@ from typing import TypedDict
 
 
 class RelocationModifiers(BaseSettings):
-    base_probability: int = 20
+    base_probability: int = 15
 
     class HumanNameMod(TypedDict):
         human_name: str
@@ -98,7 +98,11 @@ class RelocationModifiers(BaseSettings):
                 "malta",
             ],
         },
-        "usa": {"mod": -20, "language_coefficient": 1, "countries": ["usa"]},
+        "united states": {
+            "mod": -20,
+            "language_coefficient": 1,
+            "countries": ["united states"],
+        },
         "canada": {"mod": 15, "language_coefficient": 2, "countries": ["canada"]},
         "latin-america": {
             "mod": 10,
