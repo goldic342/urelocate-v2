@@ -1,8 +1,11 @@
 import { Box, HStack, Text, Heading, Button } from '@chakra-ui/react'
 import { ArrowRight } from 'lucide-react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import ContactModal from '../ContactModal'
 const Hero = () => {
   const navigate = useNavigate()
+  const [isOpen, setIsOpen] = useState(false)
   return (
     <Box>
       <Box
@@ -43,13 +46,14 @@ const Hero = () => {
           <Button
             variant={'outline'}
             onClick={() => {
-              alert('also modal here')
+              setIsOpen(true)
             }}
           >
             Связяться
           </Button>
         </HStack>
       </Box>
+      <ContactModal isOpen={isOpen} onClick={() => setIsOpen(false)} />
     </Box>
   )
 }
