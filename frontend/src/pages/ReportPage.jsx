@@ -6,7 +6,7 @@ import ExpensesSection from '../components/ExpensesSection'
 import VacanciesSection from '../components/VacanciesSection'
 import useRemoteData from '../hooks/userRemoteData'
 import ReportAPI from '../api/report'
-import Loader from '../components/Loder'
+import Loader from '../components/Loader'
 
 const ReportPage = () => {
   const [searchParams] = useSearchParams()
