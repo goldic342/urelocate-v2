@@ -20,11 +20,11 @@ const HomePage = () => {
         </Box>
 
         <Box maxW={'4xl'}>
-          <Box mt={24}>
+          <Box mt={48}>
             <FeaturesSection />
           </Box>
 
-          <Box mt={20}>
+          <Box mt={28}>
             <FeaturesCheckList />
           </Box>
         </Box>

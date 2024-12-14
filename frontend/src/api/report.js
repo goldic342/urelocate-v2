@@ -3,8 +3,8 @@ import { API_BASE_URL } from '../config.js'
 
 export default class ReportAPI {
   async get_report(userInput) {
-    const response = await axios.post(`${API_BASE_URL}/report`, {
-      from_county: userInput.fromCounty,
+    const data = {
+      from_county: userInput.fromCountry,
       to_country: userInput.toCountry,
       expirience_level: userInput.expirienceLevel,
       local_lang_level: userInput.localLevel,
@@ -16,8 +16,11 @@ export default class ReportAPI {
         adults: userInput.adults,
         children: userInput.childs
       }
-    })
+    }
+    const response = await axios.post(`${API_BASE_URL}/report`, data)
 
-    return await response.data
+    const d = await response.data
+    console.log(d)
+    return d
   }
 }

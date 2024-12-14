@@ -36,13 +36,14 @@ const ExpensesSection = ({ expenses }) => {
         overflow="hidden"
       >
         <VStack flex={1} align="start" spacing={6} zIndex={1} width="full">
-          <Heading mb={4}>
-            Траты в месяц:{' '}
+          <Box>
+            <Heading mb={4} mr={2} display={'inline-block'}>
+              Траты в месяц:
+            </Heading>
             <Heading color={'cyan.500'} display={'inline-block'}>
               {expenses.total_sum.toFixed(2)}$
             </Heading>
-          </Heading>
-
+          </Box>
           <VStack width="full" spacing={4} align="stretch">
             {expenses.categories.map((category) => (
               <Box

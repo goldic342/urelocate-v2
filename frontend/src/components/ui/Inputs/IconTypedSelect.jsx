@@ -19,7 +19,7 @@ const IconTypedSelect = ({
       openOnFocus
       multiple={multiple}
       value={value}
-      onChange={(e) => onChange(e)}
+      onChange={(data) => onChange(data)}
     >
       <AutoCompleteInput variant="outline" {...props}>
         {({ tags }) =>

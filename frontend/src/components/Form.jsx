@@ -66,7 +66,7 @@ const Form = ({ formValues }) => {
     englishLevel: 1,
     localLevel: 1,
     techStackScope: '',
-    techStackTools: [''],
+    techStackTools: [],
     expirienceLevel: 1,
     savings: 0,
     adults: 1,
@@ -211,12 +211,9 @@ const Form = ({ formValues }) => {
                         ? formValues.techStack[formData.techStackScope]
                         : []
                     }
+                    multiple
                     value={formData.techStackTools}
-                    onChange={(e) => {
-                      const newData = { ...formData }
-                      newData['techStackTools'].push(e)
-                      setFormData(newData)
-                    }}
+                    onChange={(e) => setFieldValue(e, 'techStackTools')}
                   />
                   <FormErrorMessage>{errors.techStackTools}</FormErrorMessage>
                 </FormControl>
@@ -228,7 +225,7 @@ const Form = ({ formValues }) => {
           <FormLabel>Ваши сбережения</FormLabel>
           <SimpleNumberInput
             value={formData.savings}
-            onChange={(e) => setFieldValue(e, 'savings')}
+            onChange={(e) => setFieldValue(parseInt(e), 'savings')}
             min={100}
             max={1000000}
             step={100}
@@ -246,7 +243,7 @@ const Form = ({ formValues }) => {
                     max={10}
                     step={1}
                     value={formData.adults}
-                    onChange={(e) => setFieldValue(e, 'adults')}
+                    onChange={(e) => setFieldValue(parseInt(e), 'adults')}
                   />
                   <FormErrorMessage>{errors.adults}</FormErrorMessage>
                 </FormControl>
@@ -261,7 +258,7 @@ const Form = ({ formValues }) => {
                     max={10}
                     step={1}
                     value={formData.childs}
-                    onChange={(e) => setFieldValue(e, 'childs')}
+                    onChange={(e) => setFieldValue(parseInt(e), 'childs')}
                   />
                   <FormErrorMessage>{errors.childs}</FormErrorMessage>
                 </FormControl>
