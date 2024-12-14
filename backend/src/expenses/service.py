@@ -25,7 +25,7 @@ class ExpensesService:
         :param country: Country name to normalize
         :return: Normalized country name for URL
         """
-        return "-".join(country.title().split())
+        return "+".join(country.title().split())
 
     @staticmethod
     def __gen_random_user_agent() -> str:
@@ -47,6 +47,7 @@ class ExpensesService:
             "https://www.numbeo.com/cost-of-living/country_result.jsp"
             f"?country={country}&displayCurrency={currency}"
         )
+
         async with httpx.AsyncClient(
             headers={"User-Agent": self.__gen_random_user_agent()}
         ) as client:
@@ -71,6 +72,7 @@ class ExpensesService:
         """
 
         normalized_country = self._normalize_country_name(country)
+        print(normalized_country)
         table = None
 
         for i in range(4):
