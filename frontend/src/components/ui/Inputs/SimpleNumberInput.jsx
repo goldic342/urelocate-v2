@@ -8,7 +8,12 @@ import {
 
 const SimpleNumberInput = ({ value, onChange, ...props }) => {
   return (
-    <NumberInput {...props} value={value} onChange={(e) => onChange(e)}>
+    <NumberInput
+      {...props}
+      value={value}
+      w={'100%'}
+      onChange={(e) => onChange(e)}
+    >
       <NumberInputField />
       <NumberInputStepper>
         <NumberIncrementStepper />

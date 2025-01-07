@@ -7,15 +7,15 @@ const FeatureCard = ({ icon, title, description }) => {
       alignItems="center"
       textAlign="center"
       h={'100%'}
-      minH="250px"
-      p={2}
+      minH={{ base: '200px', md: '250px' }}
+      p={{ base: 4, md: 6 }}
       borderRadius="md"
       transition="transform 0.3s ease"
       _hover={{ transform: 'translateY(-5px)' }}
     >
       {icon}
       <Heading
-        size="md"
+        size={{ base: 'sm', md: 'md' }}
         mt={4}
         mb={2}
         h="50px"
@@ -24,7 +24,9 @@ const FeatureCard = ({ icon, title, description }) => {
       >
         {title}
       </Heading>
-      <Text color="gray.600">{description}</Text>
+      <Text color="gray.600" fontSize={{ base: 'sm', md: 'md' }}>
+        {description}
+      </Text>
     </Flex>
   )
 }

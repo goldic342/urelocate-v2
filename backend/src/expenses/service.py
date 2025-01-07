@@ -72,7 +72,6 @@ class ExpensesService:
         """
 
         normalized_country = self._normalize_country_name(country)
-        print(normalized_country)
         table = None
 
         for i in range(4):
@@ -162,10 +161,8 @@ class ExpensesService:
             if item.item in multipliers:
                 cost = self._get_item_cost(item)
 
-                monthly_cost = cost * \
-                    multipliers[item.item] * 30  # daily * 30 days
-                monthly_costs[item.item] = round(
-                    monthly_cost, 2) * people_multiplier
+                monthly_cost = cost * multipliers[item.item] * 30  # daily * 30 days
+                monthly_costs[item.item] = round(monthly_cost, 2) * people_multiplier
 
         for key, value in additional_costs.items():
             # Find the item in costs

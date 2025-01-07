@@ -5,7 +5,7 @@ const CheckItem = ({ content, size = 12, ...props }) => {
   return (
     <HStack spacing={3}>
       <CheckIcon size={size} />
-      <Text fontSize={'lg'} {...props}>
+      <Text fontSize={{ base: 'md', md: 'lg' }} textAlign={'left'} {...props}>
         {content}
       </Text>
     </HStack>

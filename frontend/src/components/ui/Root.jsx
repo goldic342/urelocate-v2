@@ -10,7 +10,7 @@ const Root = ({ children }) => {
       <Header />
       <Outlet />
       {children}
-      <Box mt={28}>
+      <Box mt={{ base: 14, md: 20, lg: 28 }}>
         <Footer />
       </Box>
     </>

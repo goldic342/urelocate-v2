@@ -11,7 +11,7 @@ const AboutPage = () => {
       flexDir={'column'}
       minH={'74vh'}
     >
-      <VStack spacing={8} mt={20}>
+      <VStack spacing={8} mt={{ base: 12, md: 16, lg: 20 }}>
         <VStack spacing={4} align={'flex-start'}>
           <Heading>О проекте</Heading>
           <Box>
@@ -40,7 +40,9 @@ const AboutPage = () => {
             <ChakraRouterLink color="cyan.400" href={'https://numbeo.com'}>
               numbeo.com
             </ChakraRouterLink>
-            . Эти данные помогают оценить финансовую сторону переезда, добавляя
+          </Box>
+          <Box>
+            Эти данные помогают оценить финансовую сторону переезда, добавляя
             реалистичности итоговой оценке. Код проекта открыт и доступен на{' '}
             <ChakraRouterLink
               color="cyan.400"
@@ -48,7 +50,7 @@ const AboutPage = () => {
             >
               GitHub
             </ChakraRouterLink>{' '}
-            (Звезды приветствуются)
+            звезды приветствуются 🙏
           </Box>
         </VStack>
       </VStack>

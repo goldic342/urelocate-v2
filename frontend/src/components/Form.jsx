@@ -4,11 +4,12 @@ import {
   FormControl,
   FormLabel,
   Select,
-  FormErrorMessage
+  FormErrorMessage,
+  VStack
 } from '@chakra-ui/react'
 import IconTypedSelect from './ui/Inputs/IconTypedSelect'
 import LangLevelSelect from './ui/Inputs/LangLevelSelect'
-import HInputsWrapper from './ui/Inputs/HInputsWrapper'
+import InputsWrapper from './ui/Inputs/HInputsWrapper'
 import { useState } from 'react'
 import SimpleNumberInput from './ui/Inputs/SimpleNumberInput'
 import { useNavigate } from 'react-router-dom'
@@ -44,7 +45,7 @@ const validateForm = (formData) => {
   }
 
   if (formData.savings < 100) {
-    errors.savings = 'Сбережения должны составлять не менее 100$'
+    errors.savings = 'Сбережения должны составлять не менее $100 :('
   }
 
   if (formData.adults < 1 || formData.adults > 10) {
@@ -100,174 +101,194 @@ const Form = ({ formValues }) => {
   }
 
   return (
-    <Flex justify={'center'} align={'center'} direction={'column'}>
-      <Flex direction={'column'} gap={7} maxW={'2xl'}>
-        <HInputsWrapper
-          items={[
-            {
-              label: 'Где вы живете?',
-              element: (
-                <FormControl isInvalid={!!errors.fromCountry}>
-                  <IconTypedSelect
-                    value={formData.fromCountry}
-                    onChange={(e) => setFieldValue(e, 'fromCountry')}
-                    items={formValues.countries.map((name) => ({ name }))}
-                  />
-                  <FormErrorMessage>{errors.fromCountry}</FormErrorMessage>
-                </FormControl>
-              )
-            },
-            {
-              label: 'Куда хотите переехать',
-              element: (
-                <FormControl isInvalid={!!errors.toCountry}>
-                  <IconTypedSelect
-                    value={formData.toCountry}
-                    onChange={(e) => setFieldValue(e, 'toCountry')}
-                    items={formValues.countries.map((name) => ({ name }))}
-                  />
-                  <FormErrorMessage>{errors.toCountry}</FormErrorMessage>
-                </FormControl>
-              )
-            }
-          ]}
-        />
-        <HInputsWrapper
-          items={[
-            {
-              label: 'Уровень знаний английского языка',
-              element: (
-                <FormControl isInvalid={!!errors.englishLevel}>
-                  <LangLevelSelect
-                    value={formData.englishLevel}
-                    onChange={(e) =>
-                      setFieldValue(e.target.value, 'englishLevel')
-                    }
-                  />
-                  <FormErrorMessage>{errors.englishLevel}</FormErrorMessage>
-                </FormControl>
-              )
-            },
-            {
-              label: 'Уровень знаний местного языка',
-              element: (
-                <FormControl isInvalid={!!errors.localLevel}>
-                  <LangLevelSelect
-                    hasNull
-                    value={formData.localLevel}
-                    onChange={(e) =>
-                      setFieldValue(e.target.value, 'localLevel')
-                    }
-                  />
-                  <FormErrorMessage>{errors.localLevel}</FormErrorMessage>
-                </FormControl>
-              )
-            }
-          ]}
-        />
-        <FormControl isInvalid={!!errors.expirienceLevel}>
-          <FormLabel>Ваша текущая должность</FormLabel>
-          <Select
-            value={formData.expirienceLevel}
-            onChange={(e) => setFieldValue(e.target.value, 'expirienceLevel')}
-          >
-            <option value={1}>Junior</option>
-            <option value={2}>Middle</option>
-            <option value={3}>Senior</option>
-            <option value={4}>Lead/Архитектор</option>
-          </Select>
-          <FormErrorMessage>{errors.expirienceLevel}</FormErrorMessage>
-        </FormControl>
-        <HInputsWrapper
-          items={[
-            {
-              label: 'Область программирования',
-              element: (
-                <FormControl isInvalid={!!errors.techStackScope}>
-                  <Select
-                    value={formData.techStackScope}
-                    onChange={(e) => {
-                      setFieldValue(e.target.value, 'techStackScope')
-                    }}
-                  >
-                    <option value={''} disabled></option>
-                    {Object.keys(formValues.techStack).map((name) => (
-                      <option value={name} key={name}>
-                        {name}
-                      </option>
-                    ))}
-                  </Select>
-                  <FormErrorMessage>{errors.techStackScope}</FormErrorMessage>
-                </FormControl>
-              )
-            },
-            {
-              label: 'Ваш стек',
-              element: (
-                <FormControl isInvalid={!!errors.techStackTools}>
-                  <IconTypedSelect
-                    items={
-                      formData.techStackScope
-                        ? formValues.techStack[formData.techStackScope]
-                        : []
-                    }
-                    multiple
-                    value={formData.techStackTools}
-                    onChange={(e) => setFieldValue(e, 'techStackTools')}
-                  />
-                  <FormErrorMessage>{errors.techStackTools}</FormErrorMessage>
-                </FormControl>
-              )
-            }
-          ]}
-        />
-        <FormControl isInvalid={!!errors.savings}>
-          <FormLabel>Ваши сбережения</FormLabel>
-          <SimpleNumberInput
-            value={formData.savings}
-            onChange={(e) => setFieldValue(parseInt(e), 'savings')}
-            min={100}
-            max={1000000}
-            step={100}
+    <Flex justify={'center'} align={'center'} direction={'column'} w="100%">
+      <Flex direction={'column'} gap={{ base: 5, md: 7 }} maxW={'2xl'} w="100%">
+        <VStack spacing={{ base: 5, md: 7 }} w="100%">
+          <InputsWrapper
+            spacing={{ base: 4, md: 20 }}
+            direction={{ base: 'column', md: 'row' }}
+            items={[
+              {
+                label: 'Где вы живете?',
+                element: (
+                  <FormControl isInvalid={!!errors.fromCountry}>
+                    <IconTypedSelect
+                      value={formData.fromCountry}
+                      onChange={(e) => setFieldValue(e, 'fromCountry')}
+                      items={formValues.countries.map((name) => ({ name }))}
+                    />
+                    <FormErrorMessage>{errors.fromCountry}</FormErrorMessage>
+                  </FormControl>
+                )
+              },
+              {
+                label: 'Куда хотите переехать',
+                element: (
+                  <FormControl isInvalid={!!errors.toCountry}>
+                    <IconTypedSelect
+                      value={formData.toCountry}
+                      onChange={(e) => setFieldValue(e, 'toCountry')}
+                      items={formValues.countries.map((name) => ({ name }))}
+                    />
+                    <FormErrorMessage>{errors.toCountry}</FormErrorMessage>
+                  </FormControl>
+                )
+              }
+            ]}
           />
-          <FormErrorMessage>{errors.savings}</FormErrorMessage>
-        </FormControl>
-        <HInputsWrapper
-          items={[
-            {
-              label: 'Количество взрослых',
-              element: (
-                <FormControl isInvalid={!!errors.adults}>
-                  <SimpleNumberInput
-                    min={1}
-                    max={10}
-                    step={1}
-                    value={formData.adults}
-                    onChange={(e) => setFieldValue(parseInt(e), 'adults')}
-                  />
-                  <FormErrorMessage>{errors.adults}</FormErrorMessage>
-                </FormControl>
-              )
-            },
-            {
-              label: 'Количество детей',
-              element: (
-                <FormControl isInvalid={!!errors.childs}>
-                  <SimpleNumberInput
-                    min={0}
-                    max={10}
-                    step={1}
-                    value={formData.childs}
-                    onChange={(e) => setFieldValue(parseInt(e), 'childs')}
-                  />
-                  <FormErrorMessage>{errors.childs}</FormErrorMessage>
-                </FormControl>
-              )
-            }
-          ]}
-        />
+
+          <InputsWrapper
+            spacing={{ base: 4, md: 20 }}
+            direction={{ base: 'column', md: 'row' }}
+            items={[
+              {
+                label: 'Уровень знаний английского языка',
+                element: (
+                  <FormControl isInvalid={!!errors.englishLevel}>
+                    <LangLevelSelect
+                      value={formData.englishLevel}
+                      onChange={(e) =>
+                        setFieldValue(e.target.value, 'englishLevel')
+                      }
+                    />
+                    <FormErrorMessage>{errors.englishLevel}</FormErrorMessage>
+                  </FormControl>
+                )
+              },
+              {
+                label: 'Уровень знаний местного языка',
+                element: (
+                  <FormControl isInvalid={!!errors.localLevel}>
+                    <LangLevelSelect
+                      hasNull
+                      value={formData.localLevel}
+                      onChange={(e) =>
+                        setFieldValue(e.target.value, 'localLevel')
+                      }
+                    />
+                    <FormErrorMessage>{errors.localLevel}</FormErrorMessage>
+                  </FormControl>
+                )
+              }
+            ]}
+          />
+
+          <FormControl isInvalid={!!errors.expirienceLevel}>
+            <FormLabel>Ваша текущая должность</FormLabel>
+            <Select
+              value={formData.expirienceLevel}
+              onChange={(e) => setFieldValue(e.target.value, 'expirienceLevel')}
+            >
+              <option value={1}>Junior</option>
+              <option value={2}>Middle</option>
+              <option value={3}>Senior</option>
+              <option value={4}>Lead/Архитектор</option>
+            </Select>
+            <FormErrorMessage>{errors.expirienceLevel}</FormErrorMessage>
+          </FormControl>
+
+          <InputsWrapper
+            spacing={{ base: 4, md: 20 }}
+            direction={{ base: 'column', md: 'row' }}
+            items={[
+              {
+                label: 'Область программирования',
+                element: (
+                  <FormControl isInvalid={!!errors.techStackScope}>
+                    <Select
+                      value={formData.techStackScope}
+                      onChange={(e) =>
+                        setFieldValue(e.target.value, 'techStackScope')
+                      }
+                    >
+                      <option value={''} disabled></option>
+                      {Object.keys(formValues.techStack).map((name) => (
+                        <option value={name} key={name}>
+                          {name}
+                        </option>
+                      ))}
+                    </Select>
+                    <FormErrorMessage>{errors.techStackScope}</FormErrorMessage>
+                  </FormControl>
+                )
+              },
+              {
+                label: 'Ваш стек',
+                element: (
+                  <FormControl isInvalid={!!errors.techStackTools}>
+                    <IconTypedSelect
+                      items={
+                        formData.techStackScope
+                          ? formValues.techStack[formData.techStackScope]
+                          : []
+                      }
+                      multiple
+                      value={formData.techStackTools}
+                      onChange={(e) => setFieldValue(e, 'techStackTools')}
+                    />
+                    <FormErrorMessage>{errors.techStackTools}</FormErrorMessage>
+                  </FormControl>
+                )
+              }
+            ]}
+          />
+
+          <FormControl isInvalid={!!errors.savings}>
+            <FormLabel>Ваши сбережения</FormLabel>
+            <SimpleNumberInput
+              value={formData.savings}
+              onChange={(e) => setFieldValue(parseInt(e), 'savings')}
+              min={100}
+              max={1000000}
+              step={100}
+            />
+            <FormErrorMessage>{errors.savings}</FormErrorMessage>
+          </FormControl>
+
+          <InputsWrapper
+            spacing={{ base: 4, md: 20 }}
+            direction={{ base: 'column', md: 'row' }}
+            items={[
+              {
+                label: 'Количество взрослых',
+                element: (
+                  <FormControl isInvalid={!!errors.adults}>
+                    <SimpleNumberInput
+                      min={1}
+                      max={10}
+                      step={1}
+                      value={formData.adults}
+                      onChange={(e) => setFieldValue(parseInt(e), 'adults')}
+                    />
+                    <FormErrorMessage>{errors.adults}</FormErrorMessage>
+                  </FormControl>
+                )
+              },
+              {
+                label: 'Количество детей',
+                element: (
+                  <FormControl isInvalid={!!errors.childs}>
+                    <SimpleNumberInput
+                      min={0}
+                      max={10}
+                      step={1}
+                      value={formData.childs}
+                      onChange={(e) => setFieldValue(parseInt(e), 'childs')}
+                    />
+                    <FormErrorMessage>{errors.childs}</FormErrorMessage>
+                  </FormControl>
+                )
+              }
+            ]}
+          />
+        </VStack>
       </Flex>
-      <Button mt={10} onClick={handleSubmit} variant={'gradient'}>
+      <Button
+        mt={{ base: 6, md: 10 }}
+        onClick={handleSubmit}
+        variant={'gradient'}
+        w={{ base: '100%', md: 'auto' }}
+      >
         Узнать результаты
       </Button>
     </Flex>

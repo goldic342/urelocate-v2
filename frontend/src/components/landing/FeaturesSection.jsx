@@ -11,21 +11,27 @@ const FeaturesSection = () => {
         mx="auto"
         flexDirection="column"
         alignItems="center"
-        mb={10}
+        mb={{ base: 6, md: 10 }}
+        px={4}
       >
-        <Heading size="2xl" mb={4} textAlign={'center'}>
+        <Heading size={{ base: 'xl', md: '2xl' }} mb={4} textAlign={'center'}>
           Как вы мне поможете?
         </Heading>
-        <Text maxW={'xl'} textAlign={'center'}>
+        <Text
+          maxW={'xl'}
+          textAlign={'center'}
+          fontSize={{ base: 'sm', md: 'md' }}
+        >
           Подготовим к собеседованиям, поможем найти подходящую вакансию, а
           также поможем выбрать жилье и ораганизуем логистику.
         </Text>
       </Flex>
       <Flex
-        flexDirection={{ base: 'column', md: 'row' }}
+        flexDirection={{ base: 'column', lg: 'row' }}
         justifyContent="center"
-        alignItems="center"
+        alignItems={{ base: 'stretch', lg: 'center' }}
         gap={8}
+        px={4}
       >
         <FeatureCard
           icon={
