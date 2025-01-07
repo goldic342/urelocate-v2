@@ -8,6 +8,7 @@ import theme from './theme/theme'
 import FormPage from './pages/FormPage'
 import { formLoader } from './api/loaders'
 import ReportPage from './pages/ReportPage'
+import AboutPage from './pages/AboutPage'
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: '/report',
         element: <ReportPage />
+      },
+      {
+        path: '/about',
+        element: <AboutPage />
       }
     ]
   }
