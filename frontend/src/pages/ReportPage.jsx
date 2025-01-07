@@ -41,8 +41,9 @@ const ReportPage = () => {
           <AdvicesSection
             advices={data.advices}
             specialAdvice={{
-              title: 'dsjkakaslkjd',
-              description: 'sdjakldjksaljdklasjklsda'
+              title: 'Поможем с переездом',
+              description:
+                'Устроим логистику, найдем работу, подготовим к собеседованию'
             }}
             specialAdviceButton={
               <Button variant={'gradient'}>Связяться</Button>
