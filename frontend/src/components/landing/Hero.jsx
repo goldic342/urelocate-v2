@@ -1,11 +1,9 @@
 import { Box, Stack, Text, Heading, Button } from '@chakra-ui/react'
 import { ArrowRight } from 'lucide-react'
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import ContactModal from '../ContactModal'
+import ContactBtn from '../ContactBtn'
 const Hero = () => {
   const navigate = useNavigate()
-  const [isOpen, setIsOpen] = useState(false)
   return (
     <Box>
       <Box
@@ -48,16 +46,11 @@ const Hero = () => {
           >
             Начать
           </Button>
-          <Button
-            variant={'outline'}
-            onClick={() => setIsOpen(true)}
-            width={{ base: '100%', sm: 'auto' }}
-          >
+          <ContactBtn variant={'outline'} width={{ base: '100%', sm: 'auto' }}>
             Связяться
-          </Button>
+          </ContactBtn>
         </Stack>
       </Box>
-      <ContactModal isOpen={isOpen} onClick={() => setIsOpen(false)} />
     </Box>
   )
 }

@@ -2,9 +2,9 @@ import {
   Box,
   Flex,
   HStack,
-  Button,
   Spacer,
   IconButton,
+  StackDivider,
   Drawer,
   DrawerBody,
   DrawerHeader,
@@ -12,11 +12,13 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
-  DrawerFooter
+  DrawerFooter,
+  VStack
 } from '@chakra-ui/react'
 import { Menu } from 'lucide-react'
 import Logo from './Logo'
 import ChakraRouterLink from '../ChakraRouterLink'
+import ContactBtn from '../ContactBtn'
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -36,7 +38,10 @@ const Header = () => {
           <ChakraRouterLink href={'/about'} size="18px">
             О нас
           </ChakraRouterLink>
-          <Button onClick={() => alert('modal here')}>Связаться с нами</Button>
+          <ChakraRouterLink href={'https://github.com/goldic342/urelocate-v2'}>
+            Github
+          </ChakraRouterLink>
+          <ContactBtn>Связаться с нами</ContactBtn>
         </HStack>
 
         <IconButton
@@ -53,19 +58,23 @@ const Header = () => {
             <DrawerCloseButton />
             <DrawerHeader>Меню</DrawerHeader>
             <DrawerBody>
-              <ChakraRouterLink href={'/about'} size="18px" onClick={onClose}>
-                О нас
-              </ChakraRouterLink>
+              <VStack
+                spacing={4}
+                align={'stretch'}
+                divider={<StackDivider borderColor="gray.200" />}
+              >
+                <ChakraRouterLink href={'/about'} size="18px" onClick={onClose}>
+                  О нас
+                </ChakraRouterLink>
+                <ChakraRouterLink
+                  href={'https://github.com/goldic342/urelocate-v2'}
+                >
+                  Github
+                </ChakraRouterLink>
+              </VStack>
             </DrawerBody>
             <DrawerFooter>
-              <Button
-                width={'100%'}
-                onClick={() => {
-                  alert('modal here')
-                }}
-              >
-                Связаться с нами
-              </Button>
+              <ContactBtn width={'100%'}>Связаться с нами</ContactBtn>
             </DrawerFooter>
           </DrawerContent>
         </Drawer>

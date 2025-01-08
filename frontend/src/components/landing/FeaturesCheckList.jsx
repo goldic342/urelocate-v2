@@ -18,7 +18,12 @@ const FeaturesCheckList = () => {
         <Image src={pic} />
       </Box>
       <Box>
-        <Flex justifyContent={'flex-start'} flexDir={'column'} gap={4}>
+        <Flex
+          justifyContent={'flex-start'}
+          align={{ base: 'center', lg: 'left' }}
+          flexDir={'column'}
+          gap={4}
+        >
           <Heading
             size={{ base: 'xl', md: '2xl' }}
             textAlign={{ base: 'center', lg: 'left' }}
