@@ -10,8 +10,16 @@ const PercentProgress = ({ value }) => {
   else if (value >= 80) color = 'green.400'
 
   return (
-    <CircularProgress value={value} min={0} max={100} size={156} color={color}>
-      <CircularProgressLabel>{value}%</CircularProgressLabel>
+    <CircularProgress
+      value={value}
+      min={0}
+      max={100}
+      size={{ base: '120px', md: '156px' }}
+      color={color}
+    >
+      <CircularProgressLabel fontSize={{ base: 'xl', md: '2xl' }}>
+        {value}%
+      </CircularProgressLabel>
     </CircularProgress>
   )
 }
