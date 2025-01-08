@@ -23,13 +23,8 @@ const CTA = () => {
       >
         Релокация в новую страну
       </Heading>
-      <Flex
-        direction="column"
-        gap={4}
-        maxW={'lg'}
-        align={{ base: 'center', md: 'flex-start' }}
-      >
-        <Text textAlign={{ base: 'center', md: 'left' }}>
+      <Flex direction="column" gap={4} maxW={'lg'} align={'flex-start'}>
+        <Text textAlign={'left'}>
           Заполни форму, и мы проведем анализ твоего переезда: какие шаги нужно
           сделать, сколько потребуется денег и какие приключения тебя ждут в
           новой стране.
