@@ -72,5 +72,4 @@ class AdvicesService:
             ]
             advices.append(random.choice(adults_advices))
 
-        # Limit the number of advices to the requested count
         return random.sample(advices, min(len(advices), advices_count))

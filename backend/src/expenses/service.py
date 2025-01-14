@@ -54,6 +54,7 @@ class ExpensesService:
             try:
                 response = await client.get(url)
                 response.raise_for_status()
+                raise ValueError
             except httpx.RequestError as e:
                 raise ValueError(f"Error fetching data: {e}")
 
@@ -67,7 +68,7 @@ class ExpensesService:
         Asynchronously retrieve cost of living data for a given country from Numbeo.
 
         :param country: Name of the country
-        :param currency: Currency to display costs in (default: CAD)
+        :param currency: Currency to display costs in (default: USD)
         :return: Dictionary containing country, currency, and cost of living data
         """
 
