@@ -18,12 +18,18 @@ const ReportPage = () => {
   const { data, isLoading, error } = useRemoteData(async () => {
     const reportApi = new ReportAPI()
     const params = searchParams.get('q')
+    let data
 
     if (!params) {
       setParamsError('Недействительная ссылка...')
     }
 
-    return await reportApi.get_report(JSON.parse(atob(params)))
+    try {
+      data = JSON.parse(atob(params))
+    } catch {
+      setParamsError('Недействительная ссылка...')
+    }
+    return await reportApi.get_report(data)
   }, [])
 
   if (paramsError) {

@@ -1,5 +1,6 @@
 import { Spinner, Box, Text, Center, Heading, Flex } from '@chakra-ui/react'
 import { useEffect } from 'react'
+import ErrorDisplay from './ErrorDisplay'
 
 const Loader = ({ isLoading, error }) => {
   // Overcompicated Loader with cursor effect
@@ -73,24 +74,7 @@ const Loader = ({ isLoading, error }) => {
   }, [isLoading])
 
   if (error) {
-    return (
-      <Center h="100vh">
-        <Box
-          textAlign="center"
-          color="red.600"
-          p={6}
-          borderRadius="md"
-          bg="white"
-        >
-          <Heading size="lg" mb={4} fontWeight="bold">
-            Ошибка
-          </Heading>
-          <Text fontSize="md" color="gray.700">
-            {error.message || 'Что-то пошло не так'}
-          </Text>
-        </Box>
-      </Center>
-    )
+    return <ErrorDisplay error={error} />
   }
 
   if (isLoading) {

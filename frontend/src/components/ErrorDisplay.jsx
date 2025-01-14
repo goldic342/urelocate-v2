@@ -3,9 +3,11 @@ import ErrorMessage from './ErrorMessage'
 import ErrorNavigationLinks from './ErrorNavigationLinks'
 
 const ErrorDisplay = ({ error }) => {
+  console.log('errorrrr', error)
   const status = error?.status
   const statusText = error?.statusText
-  let errorMessage = error?.errorMessage || 'Что-то пошло не так :('
+  let errorMessage =
+    error?.errorMessage || error?.message || 'Что-то пошло не так :('
 
   return (
     <Box
