@@ -51,12 +51,8 @@ class ExpensesService:
         async with httpx.AsyncClient(
             headers={"User-Agent": self.__gen_random_user_agent()}
         ) as client:
-            try:
-                response = await client.get(url)
-                response.raise_for_status()
-                raise ValueError
-            except httpx.RequestError as e:
-                raise ValueError(f"Error fetching data: {e}")
+            response = await client.get(url)
+            response.raise_for_status()
 
         soup = BeautifulSoup(response.text, "html.parser")
         return soup.find("table", class_="data_wide_table")
@@ -75,8 +71,14 @@ class ExpensesService:
         normalized_country = self._normalize_country_name(country)
         table = None
 
-        for i in range(4):
-            table = await self.__get_exp_table(normalized_country)
+        for _ in range(4):
+            try:
+                table = await self.__get_exp_table(normalized_country)
+            except httpx.RequestError as e:
+                print(e)  # Maybe later replace with logger
+                raise HTTPException(
+                    status_code=500, detail="Failed to parse table from numbeo.com"
+                )
             if table:
                 break
 
