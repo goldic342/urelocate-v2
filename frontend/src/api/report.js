@@ -19,8 +19,6 @@ export default class ReportAPI {
     }
     const response = await axios.post(`${API_BASE_URL}/report`, data)
 
-    const d = await response.data
-    console.log(d)
-    return d
+    return await response.data
   }
 }

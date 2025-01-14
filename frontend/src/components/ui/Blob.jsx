@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react'
 import { gbc } from '@yuvalkarif/gradient-blob'
 import { useEffect, useState } from 'react'
-import PropTypes from 'prop-types' // Import PropTypes
+import PropTypes from 'prop-types'
 
 const Blob = ({
   points = 30,
@@ -13,10 +13,11 @@ const Blob = ({
   height = { base: '250px', md: '300px', lg: '400px' },
   gradient = 'linear(to-tr, cyan.500, blue.500)',
   cacheChance = 50,
+  zIndex = -1,
   ...props
 }) => {
   const { gb } = gbc({ cacheChance })
-  const [gr, sgr] = useState('12, 20')
+  const [gr, sgr] = useState('0 0')
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -31,7 +32,8 @@ const Blob = ({
     <Box
       sx={{
         filter: `blur(${blur}px)`,
-        opacity
+        opacity,
+        zIndex
       }}
     >
       <Box
@@ -39,7 +41,7 @@ const Blob = ({
           width,
           height,
           background: color,
-          transition: 'clip-path 1s ease-in-out',
+          transition: `clip-path ${interval / 1000}s ease-in-out`,
           clipPath: `polygon(${gr})`,
           bgGradient: gradient
         }}
@@ -58,7 +60,8 @@ Blob.propTypes = {
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   cacheChance: PropTypes.number,
-  gradient: PropTypes.string
+  gradient: PropTypes.string,
+  zIndex: PropTypes.number
 }
 
 export default Blob

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Container, Flex, Box, Text } from '@chakra-ui/react'
 import PercentProgress from '../components/ui/PercentProgress'
 import { useSearchParams } from 'react-router-dom'
@@ -8,19 +9,26 @@ import useRemoteData from '../hooks/userRemoteData'
 import ReportAPI from '../api/report'
 import Loader from '../components/Loader'
 import ContactBtn from '../components/ContactBtn'
+import ErrorDisplay from '../components/ErrorDisplay'
 
 const ReportPage = () => {
   const [searchParams] = useSearchParams()
+  const [paramsError, setParamsError] = useState('')
+
   const { data, isLoading, error } = useRemoteData(async () => {
     const reportApi = new ReportAPI()
     const params = searchParams.get('q')
 
     if (!params) {
-      throw new Error('Ошибка при генерации отчета: q параметр отсутсвует')
+      setParamsError('Недействительная ссылка...')
     }
 
     return await reportApi.get_report(JSON.parse(atob(params)))
   }, [])
+
+  if (paramsError) {
+    return <ErrorDisplay error={{ errorMessage: paramsError }} />
+  }
 
   return (
     <>

@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 
 const Loader = ({ isLoading, error }) => {
   // Overcompicated Loader with cursor effect
-  // Written by chatGPT, I would not spent my time doing this type development
+  // Written by chatGPT, I would not spent my time doing this
   useEffect(() => {
     if (!isLoading) return
 

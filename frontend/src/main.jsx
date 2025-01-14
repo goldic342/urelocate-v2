@@ -9,11 +9,13 @@ import FormPage from './pages/FormPage'
 import { formLoader } from './api/loaders'
 import ReportPage from './pages/ReportPage'
 import AboutPage from './pages/AboutPage'
+import ErrorPage from './pages/ErrorPage'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
