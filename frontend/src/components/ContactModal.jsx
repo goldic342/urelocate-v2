@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -10,21 +10,21 @@ import {
   Button,
   FormControl,
   FormLabel,
-  Input
-} from '@chakra-ui/react'
+  Input,
+} from "@chakra-ui/react";
 
 const ContactModal = ({ isOpen, onClose }) => {
-  const [formData, setFormData] = useState({ name: '', telegram: '' })
+  const [formData, setFormData] = useState({ name: "", telegram: "" });
 
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = () => {
-    console.log('Form Data:', formData)
-    onClose()
-  }
+    console.log("Form Data:", formData);
+    onClose();
+  };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -60,7 +60,7 @@ const ContactModal = ({ isOpen, onClose }) => {
         </ModalFooter>
       </ModalContent>
     </Modal>
-  )
-}
+  );
+};
 
-export default ContactModal
+export default ContactModal;
