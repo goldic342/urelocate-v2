@@ -1,5 +1,5 @@
-import { Box, Text, Flex } from '@chakra-ui/react'
-import ChakraRouterLink from '../ChakraRouterLink'
+import { Box, Text, Flex } from "@chakra-ui/react";
+import ChakraRouterLink from "../ChakraRouterLink";
 
 const Footer = () => {
   return (
@@ -11,15 +11,15 @@ const Footer = () => {
       px={8}
       textAlign="center"
     >
-      <Flex align="center" justify={'center'} maxW="100%" gap={10}>
+      <Flex align="center" justify={"center"} maxW="100%" gap={10}>
         <Text fontSize="sm">
-          Created by{' '}
+          Created by{" "}
           <ChakraRouterLink
             href="https://goldic.xyz"
             color="gray.800"
             isExternal
             fontWeight="semibold"
-            _hover={{ color: 'cyan.500' }}
+            _hover={{ color: "cyan.500" }}
           >
             goldic.xyz
           </ChakraRouterLink>
@@ -31,7 +31,7 @@ const Footer = () => {
         </Text>
       </Flex>
     </Box>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
