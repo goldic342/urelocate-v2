@@ -1,4 +1,4 @@
-# Project Name
+# URelocate
 
 Web application that analyzes how successful the relocation will be as a percentage.
 It also provides information about the cost of living and available jobs in the selected country.
