@@ -11,6 +11,7 @@ Made at hackathon.
 1. [Features](#features)
 2. [Demo](#demo)
 3. [Installation](#installation)
+4. [WARNING](#warning)
 
 ---
 
@@ -65,3 +66,7 @@ Demo will be here soon...
    ```bash
    fastapi dev src/main.py
    ```
+
+# Warning
+
+There are a lot of bugs, even in prod environment. I was so lazy to fix them, so enjoy.
