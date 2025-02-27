@@ -30,17 +30,18 @@ async def get_ip_info(ip: str) -> dict:
     return {}
 
 
-async def rate_limiter(user_info: ContactInfo):
-    """Rate limits requests to one per 30 minutes per Telegram username."""
+async def rate_limiter(request: Request):
+    """Rate limits requests to one per 30 minutes per IP address."""
+    user_ip = request.client.host  # Extract user's IP address
     now = time.time()
-    last_request = LAST_REQUEST_TIME.get(user_info.tg_username, 0)
+    last_request = LAST_REQUEST_TIME.get(user_ip, 0)
 
-    if now - last_request < 1800:
+    if now - last_request < 1800:  # 1800 seconds = 30 minutes
         raise HTTPException(
-            status_code=429, detail="Too many requests. Try again later."
+            status_code=429, detail="Too many requests from this IP. Try again later."
         )
 
-    LAST_REQUEST_TIME[user_info.tg_username] = now
+    LAST_REQUEST_TIME[user_ip] = now
 
 
 def get_device_info(user_agent: str) -> str:
@@ -89,6 +90,7 @@ async def get_report(user_info: ContactInfo, request: Request):
     message = (
         f"*New Contact Request*\n"
         f"👤 *Name:* `{user_info.name}`\n"
+        f"📱 *Telegram:* `{user_info.tg_username}`\n"
         f"🌍 *IP Address:* `{user_ip}`\n"
         f"📍 *Location:* `{location}`\n"
         f"🔌 *ISP:* `{isp}`\n"
