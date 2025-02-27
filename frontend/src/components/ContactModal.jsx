@@ -11,19 +11,74 @@ import {
   FormControl,
   FormLabel,
   Input,
+  FormErrorMessage,
+  useToast,
 } from "@chakra-ui/react";
+import { ContactAPI } from "../api/contact";
 
 const ContactModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({ name: "", telegram: "" });
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const toast = useToast();
+
+  const validateForm = () => {
+    let newErrors = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = "Имя не должно быть пустым";
+    }
+
+    if (!formData.telegram.trim()) {
+      newErrors.telegram = "Telegram не должен быть пустым";
+    } else if (!/^@[\w\d_]+$/.test(formData.telegram)) {
+      newErrors.telegram = "Введите корректный Telegram (@username)";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = () => {
-    console.log("Form Data:", formData);
-    onClose();
+  const handleSubmit = async () => {
+    if (!validateForm()) return;
+
+    setIsSubmitting(true);
+    try {
+      const success = await new ContactAPI().contactMessage(
+        formData.name,
+        formData.telegram,
+      );
+
+      if (success) {
+        toast({
+          title: "Сообщение отправлено!",
+          description: "Мы свяжемся с вами в ближайшее время.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+
+        setFormData({ name: "", telegram: "" });
+        onClose();
+      } else {
+        throw new Error("Ошибка при отправке");
+      }
+    } catch (error) {
+      toast({
+        title: "Ошибка",
+        description: "Не удалось отправить сообщение. Попробуйте позже.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -33,7 +88,7 @@ const ContactModal = ({ isOpen, onClose }) => {
         <ModalHeader>Свяжитесь с нами</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <FormControl isRequired mb={4}>
+          <FormControl isRequired mb={4} isInvalid={errors.name}>
             <FormLabel>Имя</FormLabel>
             <Input
               placeholder="Имя"
@@ -41,20 +96,28 @@ const ContactModal = ({ isOpen, onClose }) => {
               value={formData.name}
               onChange={handleChange}
             />
+            <FormErrorMessage>{errors.name}</FormErrorMessage>
           </FormControl>
-          <FormControl isRequired>
+
+          <FormControl isRequired isInvalid={errors.telegram}>
             <FormLabel>Telegram</FormLabel>
             <Input
-              placeholder="@urelocate_info"
+              placeholder="@username"
               name="telegram"
               value={formData.telegram}
               onChange={handleChange}
             />
+            <FormErrorMessage>{errors.telegram}</FormErrorMessage>
           </FormControl>
         </ModalBody>
 
         <ModalFooter>
-          <Button mr={3} onClick={handleSubmit}>
+          <Button
+            mr={3}
+            onClick={handleSubmit}
+            isLoading={isSubmitting}
+            isDisabled={isSubmitting}
+          >
             Отправить
           </Button>
         </ModalFooter>
