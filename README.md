@@ -1,72 +1,82 @@
 # URelocate
 
-Web application that analyzes how successful the relocation will be as a percentage.
-It also provides information about the cost of living and available jobs in the selected country.
-Made at hackathon.
+**URelocate** is a web application developed during a hackathon to assist individuals considering relocation to a new country. It evaluates the potential success rate of relocation and provides insights into the cost of living and available job opportunities in the selected destination.
 
 ---
 
-## **Table of Contents**
+## Live Demo
 
-1. [Features](#features)
-2. [Demo](#demo)
-3. [Installation](#installation)
-4. [WARNING](#warning)
+Access the application here: [Live Demo](https://urelocate.goldic.xyz)
 
----
-
-## **Features**
-
-- Feature 1: Percentage chance of relocation
-- Feature 2: Cost of Living from [numbeo.com](https://numbeo.com)
-- Feature 3: Jobs in selected country via careerjet [API](https://www.careerjet.gl/docs/api/careerjet)
+_Note: The demo is in a development state and may contain bugs or incomplete features._
 
 ---
 
-## **Demo**
+## Features
 
-[Live Demo](https://urelocate.goldic.xyz)  
-Demo will be here soon...
+- **Relocation Success Probability**: Calculates the likelihood of a successful relocation based on various factors.
+- **Cost of Living Analysis**: Fetches up-to-date cost of living data from [Numbeo](https://numbeo.com).
+- **Job Opportunities**: Retrieves current job listings in the selected country via the [Careerjet API](https://www.careerjet.gl/docs/api/careerjet).
 
 ---
 
-## **Installation**
+## Installation
 
-### Steps
+To set up the project locally:
 
-1. Install dependencies:
+1. **Clone the Repository**:
 
    ```bash
-   cd frontend && npm i && cd ..
+   git clone https://github.com/goldic342/urelocate-v2.git
+   cd urelocate-v2
    ```
+
+2. **Install Frontend Dependencies**:
 
    ```bash
-   cd backend && pip install -r requirements.txt
+   cd frontend
+   npm install
+   cd ..
    ```
 
-2. Set up environment variables:
+3. **Install Backend Dependencies**:
 
-   - Copy `.env.example` to `.env`:
+   ```bash
+   cd backend
+   pip install -r requirements.txt
+   cd ..
+   ```
+
+4. **Configure Environment Variables**:
+
+   - Copy the example environment file:
 
      ```bash
      cp .env.example .env
      ```
 
-   - Edit `.env` file to match your configuration.
+   - Open `.env` and update the variables as needed.
 
-3. Run the application:
-   Frontend:
+5. **Run the Application**:
 
-   ```bash
-   npm run dev
-   ```
+   - **Frontend**:
 
-   Backend:
+     ```bash
+     cd frontend
+     npm run dev
+     ```
 
-   ```bash
-   fastapi dev src/main.py
-   ```
+   - **Backend**:
 
-# Warning
+     ```bash
+     cd backend
+     uvicorn src.main:app --reload
+     ```
 
-There are a lot of bugs, even in prod environment. I was so lazy to fix them, so enjoy.
+---
+
+## Disclaimer
+
+This project was developed rapidly during a hackathon and is not actively maintained. As such, it may contain bugs or incomplete features.
+
+For any inquiries, please use the contact form available in the [Demo](https://urelocate.goldic.xyz).
