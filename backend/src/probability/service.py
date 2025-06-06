@@ -10,10 +10,10 @@ from src.expenses.service import ExpensesService
 
 class RelocationProbabilityService:
     @staticmethod
-    def __region_by_country(country: str) -> str:
+    def __region_by_country(country_input: str) -> str:
         for name, region in relocation_modifiers.geography_modifiers.items():
             for country in region["countries"]:  # type: ignore
-                if country.lower() == country.lower():
+                if country_input.lower() == country.lower():
                     return name
 
         raise ValueError("Country not in list")

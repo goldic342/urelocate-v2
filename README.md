@@ -25,7 +25,7 @@ Made at hackathon.
 
 ## **Demo**
 
-[Live Demo](https://example.com)  
+[Live Demo](https://urelocate.goldic.xyz)  
 Demo will be here soon...
 
 ---

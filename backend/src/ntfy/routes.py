@@ -90,7 +90,7 @@ async def get_report(user_info: ContactInfo, request: Request):
     message = (
         f"*New Contact Request*\n"
         f"👤 *Name:* `{user_info.name}`\n"
-        f"📱 *Telegram:* `{user_info.tg_username}`\n"
+        f"📱 *Telegram:* {user_info.tg_username}\n"
         f"🌍 *IP Address:* `{user_ip}`\n"
         f"📍 *Location:* `{location}`\n"
         f"🔌 *ISP:* `{isp}`\n"
