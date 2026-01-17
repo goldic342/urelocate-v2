@@ -2,7 +2,8 @@
 
 **URelocate** is a web application developed during a hackathon to assist individuals considering relocation to a new country. It evaluates the potential success rate of relocation and provides insights into the cost of living and available job opportunities in the selected destination.
 
----
+# Migration
+This repository has been merged to [codeberg](https://codeberg.org/goldic/urelocate-v2)
 
 ## Live Demo
 
